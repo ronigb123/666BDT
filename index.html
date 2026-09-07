@@ -1,638 +1,1265 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>666BDT • Play • Bonus • Rewards</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>666BDT</title>
+
 <style>
-*{box-sizing:border-box}
-:root{--bg:#070417;--card:#11102a;--line:#38206d;--purple:#8b2cff;--gold:#ffd447;--pink:#ff35b5;--text:#fff;--muted:#bcb4d7}
-html,body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,system-ui,sans-serif}
-body{min-height:100vh;background:radial-gradient(circle at 80% 0%,#2d0960 0,transparent 30%),radial-gradient(circle at 10% 35%,#17052e 0,transparent 35%),var(--bg)}
-button,input{font:inherit}button{cursor:pointer}
-.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:82px}
-.top{padding:18px 18px 8px;display:flex;align-items:center;gap:14px}
-.menu{font-size:30px;background:none;border:0;color:#fff;width:42px}
-.logoBox{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-size:36px;background:linear-gradient(135deg,#8c2cff,#f0a52d);box-shadow:0 0 28px #7b21c855}
-.brand{flex:1}.brand h1{margin:0;color:var(--gold);font-size:30px}.brand p{margin:3px 0;color:#cfc5e7;font-size:16px}
-.iconBtn{width:44px;height:44px;border-radius:50%;border:1px solid #5e2db0;background:#3516a2;color:#fff;font-size:22px}
-.wrap{padding:0 18px}
-.balance{margin:10px 0 18px;padding:22px;border-radius:30px;background:linear-gradient(125deg,#681eff,#bd42b5 58%,#ffb51e);position:relative;overflow:hidden;box-shadow:0 12px 35px #6c20a844}
-.balance:after{content:"🪙";position:absolute;right:24px;top:35px;font-size:74px}
-.label{font-size:17px;color:#eee}.cash{font-size:46px;font-weight:900;margin:3px 0 6px}.coins{font-size:18px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-.actions button{padding:14px;border-radius:17px;border:0;font-weight:900;font-size:17px}
-.deposit{background:var(--gold);color:#171022}.withdraw{background:#fff;color:#171022}
-.notice{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#0f0b20;white-space:nowrap;overflow:hidden}
-.notice span{display:inline-block;animation:scroll 12s linear infinite}
-@keyframes scroll{from{transform:translateX(100%)}to{transform:translateX(-120%)}}
-.quickTitle,.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}
-.sectionTitle h2,.quickTitle h2{margin:0;font-size:27px}.count{color:#b979ff}
-.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.quick button{min-height:95px;border-radius:20px;border:1px solid var(--line);background:#0d0a20;color:#ddd;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.quick b{font-size:31px}.quick small{font-size:13px}
-.categories{display:flex;gap:9px;overflow:auto;padding-bottom:5px}
-.cat{white-space:nowrap;padding:10px 18px;border-radius:22px;border:1px solid var(--line);background:#0d0a20;color:#bbb}
-.cat.active{background:linear-gradient(90deg,#8b2cff,#c43bdf);color:#fff;border-color:#a45cff}
-.games{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.game{border:1px solid #352064;background:#0d0a1e;border-radius:20px;padding:8px;overflow:hidden}
-.cover{height:145px;border-radius:15px;display:grid;place-items:center;font-size:48px;font-weight:900;background:linear-gradient(135deg,#29105b,#9b1fc8 55%,#ef9e20);position:relative}
-.cover:after{content:"666BDT";position:absolute;bottom:7px;left:10px;font-size:11px;opacity:.7}
-.gname{padding:10px 4px 7px;font-weight:900;font-size:14px;height:47px;overflow:hidden}
-.open{width:100%;padding:10px;border:0;border-radius:12px;background:linear-gradient(90deg,#ffd447,#ff9c2b);font-weight:900;color:#171022}
-.page{display:none}.page.active{display:block}
-.card{margin:12px 0;padding:18px;border:1px solid var(--line);border-radius:20px;background:#100b21}
-.row{display:flex;justify-content:space-between;gap:12px;margin:10px 0}
-.bonusBtn{padding:12px 16px;border:0;border-radius:13px;background:#fff;color:#111;font-weight:900}
-.profile{padding-bottom:20px}
-.avatar{width:78px;height:78px;border-radius:50%;margin:10px auto;background:linear-gradient(135deg,#8b2cff,#2d11bd);display:grid;place-items:center;font-size:42px}
-.center{text-align:center}
-nav{position:fixed;bottom:0;left:0;right:0;z-index:20;max-width:720px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:9px 5px calc(9px + env(safe-area-inset-bottom));background:#0a0717ee;border-top:1px solid #3b2170;backdrop-filter:blur(12px)}
-nav button{background:none;border:0;color:#aaa;padding:4px;font-size:12px}
-nav b{display:block;font-size:23px;margin-bottom:3px}
-nav button.active{color:var(--gold)}
-.modal{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:flex-end;justify-content:center}
-.modal.show{display:flex}
-.sheet{width:100%;max-width:720px;max-height:92vh;overflow:auto;background:#101127;border:1px solid #3e2b6d;border-radius:28px 28px 0 0;padding:20px 18px 30px;box-shadow:0 -20px 60px #000}
-.sheetHead{display:flex;justify-content:space-between;align-items:center}
-.close{width:42px;height:42px;border:0;border-radius:50%;background:#24263f;color:#fff;font-size:25px}
-.methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
-.method{padding:15px;border-radius:16px;border:2px solid #3d2a68;background:#15142e;color:#fff;text-align:left}
-.method.selected{border-color:#ff46b8;background:#24113c}
-.method b{font-size:17px}.num{font-size:14px;color:#ff55bd;margin-top:5px}
-.field{width:100%;padding:14px;border:1px solid #34245d;border-radius:14px;background:#080817;color:#fff;outline:none;margin-top:10px}
-.submit{width:100%;margin-top:14px;padding:15px;border:0;border-radius:16px;background:linear-gradient(90deg,#ff9f1c,#a62cff);color:#fff;font-weight:900}
-.hint{padding:14px;border-radius:16px;background:#17172f;color:#c7c3d8;font-size:13px;line-height:1.5;margin-top:12px}
-.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.amount{padding:13px 5px;border-radius:13px;border:1px solid var(--line);background:#0b0820;color:#fff;font-weight:900}
-.amount.selected{background:#8d28ff;border-color:#e56cff}
-@media(min-width:600px){.games{grid-template-columns:repeat(3,1fr)}.cover{height:160px}}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#08050f;
+  color:#fff;
+  min-height:100vh;
+}
+
+.app{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:85px;
+  background:linear-gradient(180deg,#12091f,#08050f);
+}
+
+header{
+  padding:20px 16px 10px;
+}
+
+.logo{
+  font-size:30px;
+  font-weight:900;
+  background:linear-gradient(90deg,#c66cff,#ffd75a);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.subtitle{
+  color:#aaa;
+  font-size:12px;
+  margin-top:3px;
+}
+
+.balance-card{
+  margin:12px 14px;
+  padding:20px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#241044,#3a1d57);
+  border:1px solid #543579;
+  box-shadow:0 8px 30px #0008;
+}
+
+.balance-title{
+  color:#cfc4db;
+  font-size:13px;
+}
+
+.balance{
+  font-size:34px;
+  font-weight:900;
+  margin:8px 0;
+}
+
+.coin{
+  color:#ffd65a;
+  font-weight:bold;
+}
+
+.buttons{
+  display:flex;
+  gap:10px;
+  margin-top:16px;
+}
+
+button{
+  cursor:pointer;
+}
+
+.main-btn{
+  flex:1;
+  border:0;
+  border-radius:13px;
+  padding:13px;
+  font-weight:800;
+  color:white;
+  background:linear-gradient(90deg,#a64dff,#ffb52f);
+}
+
+.dark-btn{
+  flex:1;
+  border:1px solid #49315e;
+  border-radius:13px;
+  padding:13px;
+  font-weight:800;
+  color:white;
+  background:#171021;
+}
+
+.notice{
+  margin:12px 14px;
+  padding:14px;
+  border-radius:15px;
+  background:#15101e;
+  border:1px solid #352346;
+  color:#ddd;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.section-title{
+  padding:12px 14px;
+  font-size:20px;
+  font-weight:900;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  padding:0 14px;
+}
+
+.box{
+  background:#130d1c;
+  border:1px solid #322143;
+  border-radius:17px;
+  padding:15px;
+}
+
+.box-title{
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.small{
+  color:#999;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.full{
+  width:100%;
+  margin-top:10px;
+}
+
+.treasure{
+  margin:12px 14px;
+  padding:20px;
+  text-align:center;
+  border-radius:20px;
+  background:linear-gradient(135deg,#211406,#251535);
+  border:1px solid #75551e;
+}
+
+.treasure-icon{
+  font-size:50px;
+  margin-bottom:8px;
+}
+
+.treasure h3{
+  color:#ffd65a;
+  margin-bottom:7px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  margin-top:8px;
+  border-radius:12px;
+  border:1px solid #3d2b50;
+  outline:none;
+  background:#09060d;
+  color:white;
+}
+
+input::placeholder{
+  color:#777;
+}
+
+nav{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:520px;
+  display:flex;
+  background:#100a18;
+  border-top:1px solid #30203f;
+  padding:8px;
+  z-index:20;
+}
+
+.nav-btn{
+  flex:1;
+  border:0;
+  background:none;
+  color:#888;
+  padding:8px;
+  font-size:12px;
+}
+
+.nav-btn.active{
+  color:#ffd65a;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#000b;
+  display:none;
+  align-items:flex-end;
+  z-index:50;
+}
+
+.sheet{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  background:#110b18;
+  border:1px solid #49305f;
+  border-radius:25px 25px 0 0;
+  padding:20px;
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.close{
+  float:right;
+  border:0;
+  background:none;
+  color:#aaa;
+  font-size:27px;
+}
+
+.sheet h2{
+  margin-bottom:18px;
+}
+
+.method-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.method{
+  padding:15px;
+  border-radius:14px;
+  background:#181021;
+  border:1px solid #3c2950;
+  text-align:center;
+}
+
+.method.selected{
+  border-color:#ffd65a;
+  box-shadow:0 0 0 1px #ffd65a;
+}
+
+.method b{
+  display:block;
+  margin:5px 0;
+}
+
+.copy-number{
+  cursor:pointer;
+  color:#fff;
+}
+
+.copy-text{
+  color:#aaa;
+  font-size:11px;
+}
+
+.amount-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:14px 0;
+}
+
+.amount{
+  padding:12px 5px;
+  border-radius:11px;
+  border:1px solid #3b2950;
+  background:#17101f;
+  color:white;
+}
+
+.amount.selected{
+  border-color:#ffd65a;
+  color:#ffd65a;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.games-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  padding:0 14px;
+}
+
+.game{
+  padding:16px 10px;
+  min-height:105px;
+  border-radius:17px;
+  background:#130d1c;
+  border:1px solid #332044;
+}
+
+.game-icon{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:95px;
+  transform:translateX(-50%);
+  background:#27202d;
+  border:1px solid #51405d;
+  padding:11px 17px;
+  border-radius:12px;
+  display:none;
+  z-index:100;
+  white-space:nowrap;
+}
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
-<header class="top">
-<button class="menu">☰</button>
-<div class="logoBox">💰</div>
-<div class="brand">
-<h1>666BDT</h1>
-<p>Play • Bonus • Rewards</p>
-</div>
-<button class="iconBtn">🔔</button>
-<button class="iconBtn">👤</button>
+<header>
+  <div class="logo">666BDT</div>
+  <div class="subtitle">Play • Bonus • Rewards</div>
 </header>
 
-<main class="wrap">
+<!-- HOME -->
+<div id="homePage" class="page active">
 
-<section id="home" class="page active">
+  <div class="balance-card">
+    <div class="balance-title">Cash Balance</div>
+    <div class="balance">৳<span id="cashBalance">0.00</span></div>
+    <div class="coin">🪙 <span id="coinBalance">0</span> Coins</div>
 
-<div class="balance">
-<div class="label">Available Balance</div>
-<div class="cash">৳ <span id="cash">0.00</span></div>
-<div class="coins">🪙 <span id="coins">0</span> Coins</div>
+    <div class="buttons">
+      <button class="main-btn" onclick="openDeposit()">Deposit</button>
+      <button class="dark-btn" onclick="openWithdraw()">Withdraw</button>
+    </div>
+  </div>
 
-<div class="actions">
-<button class="deposit" onclick="openPay('deposit')">💳 + DEPOSIT</button>
-<button class="withdraw" onclick="openPay('withdraw')">💸 − WITHDRAW</button>
-</div>
-</div>
+  <div class="notice">
+    📢 Welcome to <b>666BDT</b><br>
+    Earn rewards, complete activities and use available bonus features.
+  </div>
 
-<div class="notice">
-<span>📢 Welcome to 666BDT • Play • Bonus • Rewards • Daily Check-in • Daily Spin • Redeem Code</span>
-</div>
+  <!-- TREASURE BOX -->
+  <div class="treasure">
+    <div class="treasure-icon">🎁</div>
+    <h3>New User Treasure Box</h3>
 
-<div class="quickTitle">
-<h2>⚡ Quick Access</h2>
-</div>
+    <p id="treasureMessage" class="small">
+      প্রথম সফল Deposit-এর পর Treasure Box থেকে ৳110 Bonus পাওয়া যাবে।
+      একজন User শুধুমাত্র একবার এই Bonus পাবে।
+    </p>
 
-<div class="quick">
-<button onclick="openPay('deposit')"><b>💳</b><small>Deposit</small></button>
-<button onclick="claimBonus()"><b>🎁</b><small>Daily Bonus</small></button>
-<button onclick="showPage('profile')"><b>👥</b><small>Referral</small></button>
-<button onclick="alert('Leaderboard coming with backend.')"><b>🏆</b><small>Ranking</small></button>
-</div>
+    <button
+      id="claimTreasureBtn"
+      class="main-btn full"
+      onclick="claimTreasure()"
+      disabled>
+      Claim ৳110
+    </button>
+  </div>
 
-<div class="sectionTitle">
-<h2>🔥 Games</h2>
-<span class="count">66 games</span>
-</div>
+  <div class="section-title">Daily Rewards</div>
 
-<div class="categories">
-<button class="cat active">All</button>
-<button class="cat">Live</button>
-<button class="cat">Slots</button>
-<button class="cat">Arcade</button>
-<button class="cat">Board</button>
-</div>
+  <div class="grid">
 
-<div id="homeGames" class="games"></div>
+    <div class="box">
+      <div class="box-title">🎁 Daily Check-in</div>
+      <div class="small">প্রতিদিন একবার +50 Coins</div>
+      <button class="main-btn full" onclick="dailyCheckin()">Check-in</button>
+    </div>
 
-</section>
+    <div class="box">
+      <div class="box-title">🎡 Daily Spin</div>
+      <div class="small">প্রতিদিন একবার Free Spin</div>
+      <button class="main-btn full" onclick="dailySpin()">Spin</button>
+    </div>
 
-<section id="games" class="page">
+    <div class="box">
+      <div class="box-title">🎟 Redeem Code</div>
+      <input id="redeemCode" placeholder="Enter Code">
+      <button class="dark-btn full" onclick="redeemCode()">Redeem</button>
+    </div>
 
-<div class="sectionTitle">
-<h2>🎮 All Games</h2>
-</div>
+    <div class="box">
+      <div class="box-title">👥 Referral</div>
+      <div class="small">
+        Referral Bonus: 150 Coins<br>
+        Lifetime Commission: 3%
+      </div>
+      <button class="dark-btn full" onclick="copyReferral()">
+        Copy Referral
+      </button>
+    </div>
 
-<div class="categories">
-<button class="cat active">All</button>
-<button class="cat">Live</button>
-<button class="cat">Slots</button>
-<button class="cat">Arcade</button>
-</div>
-
-<div id="allGames" class="games"></div>
-
-</section>
-
-<section id="wallet" class="page">
-
-<div class="sectionTitle">
-<h2>💰 Wallet</h2>
-</div>
-
-<div class="card">
-<div class="row">
-<span>Cash Balance</span>
-<b>৳ <span id="cash2">0.00</span></b>
+  </div>
 </div>
 
-<div class="row">
-<span>Coins</span>
-<b><span id="coins2">0</span></b>
-</div>
-</div>
 
-<div class="card">
-<h3>Deposit / Withdraw</h3>
-<p>Payment method: <b>bKash</b> / <b>Nagad</b></p>
+<!-- GAMES -->
+<div id="gamesPage" class="page">
 
-<div class="actions">
-<button class="deposit" onclick="openPay('deposit')">+ Deposit</button>
-<button class="withdraw" onclick="openPay('withdraw')">− Withdraw</button>
-</div>
+  <div class="section-title">🎮 Games</div>
+
+  <div class="games-grid" id="gamesContainer"></div>
+
 </div>
 
-<div class="card">
-<div class="row">
-<b>🎁 Daily Check-in</b>
-<b>+50 Coins</b>
-</div>
-<button class="bonusBtn" onclick="claimBonus()">CLAIM BONUS</button>
-</div>
 
-<div class="card">
-<div class="row">
-<b>🎡 Daily Spin</b>
-<b>Once / day</b>
-</div>
-<button class="bonusBtn" onclick="spin()">SPIN NOW</button>
-</div>
+<!-- WALLET -->
+<div id="walletPage" class="page">
 
-<div class="card">
-<div class="row">
-<b>🎟️ Redeem Code</b>
-<span>Rewards</span>
-</div>
-<button class="bonusBtn" onclick="redeem()">REDEEM</button>
-</div>
+  <div class="section-title">💳 Wallet</div>
 
-</section>
+  <div class="balance-card">
+    <div class="balance-title">Available Cash</div>
+    <div class="balance">৳<span id="walletCash">0.00</span></div>
+    <div class="coin">🪙 <span id="walletCoins">0</span> Coins</div>
+  </div>
 
-<section id="profile" class="page profile">
+  <div class="box" style="margin:12px 14px">
+    <div class="box-title">Deposit</div>
+    <div class="small">
+      Deposit করতে bKash/Nagad নম্বরে চাপ দিলে নম্বর Copy হবে।
+    </div>
+    <button class="main-btn full" onclick="openDeposit()">Open Deposit</button>
+  </div>
 
-<div class="card center">
-<div class="avatar">👤</div>
-<h2>Telegram User</h2>
-<p>User ID: <span id="uid">Demo</span></p>
-<p>Account Status: <b style="color:#58e49a">Active</b></p>
+  <div class="box" style="margin:12px 14px">
+    <div class="box-title">Withdraw</div>
+    <div class="small">
+      Withdraw করার সময় User নিজের bKash/Nagad নম্বর লিখবে।
+    </div>
+    <button class="dark-btn full" onclick="openWithdraw()">Open Withdraw</button>
+  </div>
+
 </div>
 
-<div class="card">
-<div class="row">
-<span>Referral ID</span>
-<b>666BDT-DEMO</b>
+
+<!-- PROFILE -->
+<div id="profilePage" class="page">
+
+  <div class="section-title">👤 Profile</div>
+
+  <div class="balance-card">
+    <h3>Login / Register</h3>
+    <p class="small" style="margin-top:8px">
+      Telegram Mini App-এ ব্যবহারকারীর Account তথ্য Backend-এর মাধ্যমে নিরাপদে সংরক্ষণ করতে হবে।
+    </p>
+
+    <button class="main-btn full" onclick="loginRegister()">
+      Login / Register
+    </button>
+  </div>
+
+  <div class="box" style="margin:12px 14px">
+    <div class="box-title">Referral</div>
+    <div class="small">
+      আপনার Referral Commission: 3% Lifetime
+    </div>
+  </div>
+
 </div>
 
-<div class="row">
-<span>Referral Reward</span>
-<b>150 Coins</b>
 </div>
 
-<p style="color:#bbb">
-Referral reward is intended to be credited only after the qualifying deposit is verified by the secure backend.
-</p>
-</div>
 
-<div class="card">
-<h3>🛟 Support</h3>
-<button class="submit" onclick="alert('Connect your official Telegram support link in the backend.')">
-OPEN SUPPORT
-</button>
-</div>
-
-</section>
-
-</main>
-
+<!-- BOTTOM NAV -->
 <nav>
 
-<button class="active" data-page="home" onclick="showPage('home')">
-<b>🏠</b>Home
+<button class="nav-btn active" onclick="showPage('home',this)">
+  🏠<br>Home
 </button>
 
-<button data-page="games" onclick="showPage('games')">
-<b>🎮</b>Games
+<button class="nav-btn" onclick="showPage('games',this)">
+  🎮<br>Games
 </button>
 
-<button data-page="wallet" onclick="showPage('wallet')">
-<b>💰</b>Wallet
+<button class="nav-btn" onclick="showPage('wallet',this)">
+  💳<br>Wallet
 </button>
 
-<button data-page="profile" onclick="showPage('profile')">
-<b>👤</b>Profile
+<button class="nav-btn" onclick="showPage('profile',this)">
+  👤<br>Profile
 </button>
 
 </nav>
-</div>
 
-<div id="payModal" class="modal" onclick="if(event.target===this)closePay()">
+
+<!-- DEPOSIT / WITHDRAW MODAL -->
+<div id="paymentModal" class="modal">
 
 <div class="sheet">
 
-<div class="sheetHead">
-<h2 id="payTitle">💳 Deposit Coins</h2>
-<button class="close" onclick="closePay()">×</button>
+<button class="close" onclick="closeModal()">×</button>
+
+<h2 id="modalTitle">Deposit Coins</h2>
+
+
+<!-- PAYMENT METHOD -->
+<div class="method-grid">
+
+  <div
+    id="bkashMethod"
+    class="method selected"
+    onclick="chooseMethod('bKash')">
+
+    🟢 bKash
+
+    <div
+      class="copy-number"
+      onclick="copyPaymentNumber(event,'01935654366')">
+
+      <b>01935654366</b>
+
+    </div>
+
+    <div class="copy-text">
+      Tap Number to Copy
+    </div>
+
+  </div>
+
+
+  <div
+    id="nagadMethod"
+    class="method"
+    onclick="chooseMethod('Nagad')">
+
+    🟠 Nagad
+
+    <div
+      class="copy-number"
+      onclick="copyPaymentNumber(event,'01873570387')">
+
+      <b>01873570387</b>
+
+    </div>
+
+    <div class="copy-text">
+      Tap Number to Copy
+    </div>
+
+  </div>
+
 </div>
 
-<div class="hint">
-প্রথমে <b>bKash</b> অথবা <b>Nagad</b> নির্বাচন করুন, তারপর Amount নির্বাচন করুন।
-এই HTMLটি UI prototype; বাস্তব payment/withdrawal backend verification ছাড়া এখানে টাকা প্রসেস হবে না।
+
+<!-- AMOUNT -->
+<div class="amount-grid" id="amountGrid"></div>
+
+
+<!-- DEPOSIT FORM -->
+<div id="depositForm">
+
+  <input
+    id="transactionId"
+    placeholder="Payment Reference / Transaction ID">
+
+  <div class="small" style="margin-top:7px">
+    Deposit করার পর Transaction ID দিন।
+  </div>
+
 </div>
 
-<div class="methods">
 
-<button id="bk" class="method" onclick="selectMethod('bKash')">
-💗 <b>bKash</b>
-<div class="num">01935654366</div>
+<!-- WITHDRAW FORM -->
+<div id="withdrawForm" class="hidden">
+
+  <input
+    id="withdrawNumber"
+    inputmode="numeric"
+    placeholder="আপনার bKash/Nagad নম্বর">
+
+  <div class="small" style="margin-top:7px">
+    এখানে আপনার নিজের bKash অথবা Nagad নম্বর লিখুন।
+  </div>
+
+</div>
+
+
+<button
+  id="submitPayment"
+  class="main-btn full"
+  onclick="submitPayment()">
+
+  SUBMIT DEPOSIT REQUEST
+
 </button>
 
-<button id="ng" class="method" onclick="selectMethod('Nagad')">
-🟠 <b>Nagad</b>
-<div class="num">01873570387</div>
-</button>
-
-</div>
-
-<h3>🪙 Select Amount</h3>
-
-<div id="amounts" class="amounts"></div>
-
-<input id="ref" class="field" placeholder="Payment reference / transaction ID">
-
-<div class="hint">
-• Selected number-এ <b>Send Money</b> ব্যবহার করুন।<br>
-• bKash/Nagad নির্বাচন করে তারপর Submit দিন।<br>
-• বাস্তব credit/withdrawal secure backend ও admin verification-এর মাধ্যমে করতে হবে।
-</div>
-
-<button id="submitBtn" class="submit" onclick="submitPay()">
-SUBMIT REQUEST
-</button>
-
 </div>
 </div>
+
+
+<div id="toast" class="toast"></div>
+
 
 <script>
 
-const amounts=[
-100,200,500,1000,2000,5000,10000,20000,30000
+/* =========================
+   DATA
+========================= */
+
+const amountList=[
+  100,
+  200,
+  500,
+  1000,
+  2000,
+  5000,
+  10000,
+  20000,
+  30000
 ];
 
-let action='deposit';
-let method='';
-let amount=0;
+const games=[
+"Pirate Legends",
+"Mega Bandit",
+"Dragon Gems Clash",
+"Royal Ace",
+"Dragon Gems Wheel",
+"Goldliner",
+"Crazy Money",
+"Sexy Joker",
+"Dragon Gems Super Buy",
+"Royal Hunter",
+"Dragon Gems",
+"Golden Aztec Mega",
+"Super Egypt",
+"Golden Ace",
+"Magical Alchemist",
+"Super Ace",
+"Showdown",
+"Aviator",
+"Super Ace Deluxe",
+"Super Ace 2 Stack",
+"Bounty Clash",
+"Circus Joker 4096",
+"Fortune Garda 500",
+"Super Elements",
+"Boxing King",
+"Fortune Gems 3",
+"Shoot",
+"Aztec",
+"Magic Ace Wild Lock",
+"Anubis Wrath",
+"Pinata Wins",
+"Chicken Road 2",
+"Fortune Gems 500",
+"Mega Ace",
+"Wild Bandito",
+"Fortune Gems 2",
+"Money Coming",
+"Lucky Neko",
+"Limited Game",
+"Goldmine Express",
+"Lucky Pirate",
+"Chinese New Year More Ways",
+"Double Fortune",
+"Crazy Time",
+"Spin",
+"Salt Game",
+"Ludo Game",
+"Teen Patti",
+"3 Patti"
+];
 
-let coins=Number(localStorage.getItem('666_coins')||0);
 
-function money(){
-return (coins/10).toFixed(2);
+/* =========================
+   LOCAL DEMO STATE
+========================= */
+
+let state=JSON.parse(
+  localStorage.getItem("666BDT_STATE") ||
+  '{"cash":0,"coins":0,"hasDeposited":false,"treasureClaimed":false,"checkin":"","spin":""}'
+);
+
+let currentMode="deposit";
+let selectedMethod="bKash";
+let selectedAmount=100;
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveState(){
+
+  localStorage.setItem(
+    "666BDT_STATE",
+    JSON.stringify(state)
+  );
+
+  updateUI();
 }
 
-function refresh(){
 
-document.querySelectorAll('#coins,#coins2').forEach(x=>{
-x.textContent=coins.toLocaleString();
-});
+/* =========================
+   UI
+========================= */
 
-document.querySelectorAll('#cash,#cash2').forEach(x=>{
-x.textContent=money();
-});
+function updateUI(){
 
-}
+  document.getElementById("cashBalance").textContent=
+    Number(state.cash).toFixed(2);
 
-function save(){
+  document.getElementById("coinBalance").textContent=
+    state.coins;
 
-localStorage.setItem('666_coins',coins);
-refresh();
+  document.getElementById("walletCash").textContent=
+    Number(state.cash).toFixed(2);
 
-}
+  document.getElementById("walletCoins").textContent=
+    state.coins;
 
-function showPage(id){
 
-document.querySelectorAll('.page').forEach(x=>{
-x.classList.remove('active');
-});
+  const claim=document.getElementById("claimTreasureBtn");
 
-document.getElementById(id).classList.add('active');
+  claim.disabled=
+    !state.hasDeposited ||
+    state.treasureClaimed;
 
-document.querySelectorAll('nav button').forEach(x=>{
-x.classList.toggle('active',x.dataset.page===id);
-});
 
-window.scrollTo(0,0);
+  if(state.treasureClaimed){
 
-}
+    document.getElementById("treasureMessage").textContent=
+      "৳110 Bonus ইতিমধ্যে নেওয়া হয়েছে। একজন User শুধুমাত্র একবার এই Bonus পাবে।";
 
-function openPay(a){
+    claim.textContent="Already Claimed";
 
-action=a;
-method='';
-amount=0;
+  }else if(state.hasDeposited){
 
-document.getElementById('payTitle').textContent=
-a==='deposit'
-?'💳 Deposit Coins'
-:'💸 Withdraw Coins';
+    document.getElementById("treasureMessage").textContent=
+      "আপনার প্রথম Deposit সফল হয়েছে। এখন একবার ৳110 Bonus Claim করুন।";
 
-document.getElementById('submitBtn').textContent=
-a==='deposit'
-?'SUBMIT DEPOSIT REQUEST'
-:'SUBMIT WITHDRAWAL REQUEST';
+    claim.textContent="Claim ৳110";
 
-document.getElementById('payModal').classList.add('show');
-
-document.getElementById('ref').value='';
-
-selectMethod('');
-
-renderAmounts();
+  }
 
 }
 
-function closePay(){
 
-document.getElementById('payModal').classList.remove('show');
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function showPage(page,button){
+
+  document.querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
+
+  document.getElementById(page+"Page")
+    .classList.add("active");
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(b=>b.classList.remove("active"));
+
+  button.classList.add("active");
+
+  window.scrollTo(0,0);
+}
+
+
+/* =========================
+   PAYMENT MODAL
+========================= */
+
+function openDeposit(){
+
+  currentMode="deposit";
+
+  document.getElementById("paymentModal").style.display="flex";
+
+  document.getElementById("modalTitle").textContent=
+    "Deposit Coins";
+
+  document.getElementById("depositForm")
+    .classList.remove("hidden");
+
+  document.getElementById("withdrawForm")
+    .classList.add("hidden");
+
+  document.getElementById("submitPayment").textContent=
+    "SUBMIT DEPOSIT REQUEST";
+
+  renderAmounts();
+
+  chooseMethod("bKash");
+}
+
+
+function openWithdraw(){
+
+  currentMode="withdraw";
+
+  document.getElementById("paymentModal").style.display="flex";
+
+  document.getElementById("modalTitle").textContent=
+    "Withdraw Coins";
+
+  document.getElementById("depositForm")
+    .classList.add("hidden");
+
+  document.getElementById("withdrawForm")
+    .classList.remove("hidden");
+
+  document.getElementById("submitPayment").textContent=
+    "SUBMIT WITHDRAWAL REQUEST";
+
+  renderAmounts();
+
+  chooseMethod("bKash");
+}
+
+
+function closeModal(){
+
+  document.getElementById("paymentModal").style.display="none";
 
 }
 
-function selectMethod(m){
 
-method=m;
+/* =========================
+   PAYMENT METHODS
+========================= */
 
-document.getElementById('bk')
-.classList.toggle('selected',m==='bKash');
+function chooseMethod(method){
 
-document.getElementById('ng')
-.classList.toggle('selected',m==='Nagad');
+  selectedMethod=method;
+
+  document.getElementById("bkashMethod")
+    .classList.toggle("selected",method==="bKash");
+
+  document.getElementById("nagadMethod")
+    .classList.toggle("selected",method==="Nagad");
 
 }
+
+
+/* =========================
+   COPY DEPOSIT NUMBER
+========================= */
+
+function copyPaymentNumber(event,number){
+
+  event.stopPropagation();
+
+  if(navigator.clipboard){
+
+    navigator.clipboard.writeText(number)
+      .then(()=>{
+        showToast("নম্বর Copy হয়েছে ✓");
+      })
+      .catch(()=>{
+        showToast("নম্বর: "+number);
+      });
+
+  }else{
+
+    showToast("নম্বর: "+number);
+
+  }
+
+}
+
+
+/* =========================
+   AMOUNTS
+========================= */
 
 function renderAmounts(){
 
-document.getElementById('amounts').innerHTML=
-amounts.map(a=>`
-<button class="amount ${a===amount?'selected':''}"
-onclick="chooseAmount(${a})">
-${a.toLocaleString()}
-</button>
-`).join('');
+  const container=
+    document.getElementById("amountGrid");
+
+  container.innerHTML="";
+
+  amountList.forEach(amount=>{
+
+    const btn=document.createElement("button");
+
+    btn.className="amount";
+
+    if(amount===selectedAmount){
+      btn.classList.add("selected");
+    }
+
+    btn.textContent=
+      "৳"+amount.toLocaleString();
+
+    btn.onclick=()=>{
+
+      selectedAmount=amount;
+
+      renderAmounts();
+
+    };
+
+    container.appendChild(btn);
+
+  });
 
 }
 
-function chooseAmount(a){
 
-amount=a;
-renderAmounts();
+/* =========================
+   SUBMIT
+========================= */
 
-}
+function submitPayment(){
 
-function submitPay(){
+  if(currentMode==="deposit"){
 
-if(!method){
-alert('আগে bKash অথবা Nagad নির্বাচন করুন।');
-return;
-}
+    const tx=
+      document.getElementById("transactionId")
+      .value.trim();
 
-if(!amount){
-alert('আগে Amount নির্বাচন করুন।');
-return;
-}
+    if(!tx){
 
-if(action==='deposit' &&
-!document.getElementById('ref').value.trim()){
+      showToast("Transaction ID দিন");
 
-alert('Payment reference / transaction ID দিন।');
-return;
+      return;
+    }
 
-}
 
-alert(
-(action==='deposit'?'Deposit':'Withdraw')+
-' request তৈরি হয়েছে। এটি এখনো backend-এ বাস্তবে প্রসেস হচ্ছে না।'
-);
+    /*
+      Demo behaviour:
+      Deposit request is recorded locally.
+      Real verification MUST happen on backend.
+    */
 
-closePay();
+    state.hasDeposited=true;
 
-}
+    saveState();
 
-function claimBonus(){
+    showToast(
+      "Deposit Request পাঠানো হয়েছে"
+    );
 
-let d=new Date().toISOString().slice(0,10);
+    closeModal();
 
-if(localStorage.getItem('666_bonus')===d){
+  }else{
 
-alert('আজকের Daily Check-in ইতিমধ্যে নেওয়া হয়েছে।');
-return;
+    const number=
+      document.getElementById("withdrawNumber")
+      .value.trim();
 
-}
 
-coins+=50;
+    if(!/^01\d{9}$/.test(number)){
 
-localStorage.setItem('666_bonus',d);
+      showToast(
+        "সঠিক bKash/Nagad নম্বর দিন"
+      );
 
-save();
+      return;
+    }
 
-alert('+50 Coins যোগ হয়েছে!');
 
-}
+    showToast(
+      "Withdraw Request পাঠানো হয়েছে"
+    );
 
-function spin(){
+    closeModal();
 
-let d=new Date().toISOString().slice(0,10);
-
-if(localStorage.getItem('666_spin')===d){
-
-alert('আজকের Spin ইতিমধ্যে ব্যবহার করা হয়েছে।');
-return;
+  }
 
 }
 
-let rewards=[10,20,30,50,100];
 
-let r=rewards[Math.floor(Math.random()*rewards.length)];
+/* =========================
+   TREASURE BOX
+========================= */
 
-coins+=r;
+function claimTreasure(){
 
-localStorage.setItem('666_spin',d);
+  if(
+    !state.hasDeposited ||
+    state.treasureClaimed
+  ){
 
-save();
+    return;
+  }
 
-alert('🎉 আপনি '+r+' Coins জিতেছেন!');
 
-}
+  /*
+    One user = one ৳110 bonus.
+  */
 
-function redeem(){
+  state.cash += 110;
 
-let c=prompt('Redeem Code লিখুন');
+  state.treasureClaimed=true;
 
-if(!c)return;
+  saveState();
 
-alert(
-'Code verification secure backend-এ সংযুক্ত হলে reward credit হবে।'
-);
-
-}
-
-const gameNames=[
-
-'Pirate Legends',
-'Mega Bandit',
-'Dragon Gems Clash',
-'Royal Ace',
-'Dragon Gems Wheel',
-'Goldliner',
-'Crazy Money',
-'Sexy Joker',
-'Dragon Gems Super Buy',
-'Royal Hunter',
-'Dragon Gems',
-'Golden Aztec Mega',
-'Super Egypt',
-'Golden Ace',
-'Magical Alchemist',
-'Super Ace',
-'Showdown',
-'Aviator',
-'Super Ace Deluxe',
-'Super Ace 2 Stack',
-'Bounty Clash',
-'Circus Joker 4096',
-'Fortune Garda 500',
-'Super Elements',
-'Boxing King',
-'Fortune Gems 3',
-'Shoot',
-'Aztec',
-'Magic Ace Wild Lock',
-'Anubis Wrath',
-'Pinata Wins',
-'Chicken Road 2',
-'Fortune Gems 500',
-'Mega Ace',
-'Wild Bandito',
-'Fortune Gems 2',
-'Money Coming',
-'Lucky Neko',
-'Limited Game',
-'Goldmine Express',
-'Lucky Pirate',
-'Chinese New Year More Ways',
-'Double Fortune',
-'Crazy Time',
-'Spin',
-'Salt Game',
-'Ludo Game',
-'Teen Patti',
-'3 Patti',
-'Live Crash',
-'Teen Patti Live',
-'3 Patti Live',
-'Slots',
-'Dice',
-'Spin Wheel',
-'Card Game',
-'Target',
-'Puzzle',
-'Brick Breaker',
-'Flying Game',
-'Runner',
-'Mines',
-'Coin Catch',
-'Tower Game',
-'Racing',
-'Football',
-'Basketball'
-
-];
-
-const emojis=[
-
-'🏴‍☠️','🎰','🐉','🃏','🎡','🪙','💰','🃏',
-'🐲','🏹','🐉','🏺','🐫','🂡','🧪','🃏',
-'🥊','✈️','🃏','🔥','💥','🤡','💎','⚡',
-'🥊','💎','🎯','🏺','🪄','🐺','🎁','🐔',
-'💎','🃏','🤠','💎','💵','🐱','🎮','⛏️',
-'🏴‍☠️','🧧','🍀','⏱️','🎡','🧂','🎲','🃏',
-'🃏','💥','🃏','🎰','🎲','🎡','🃏','🎯',
-'🧩','🧱','🪽','🏃','💣','🪙','🗼','🏎️',
-'⚽','🏀'
-
-];
-
-function gameHTML(n,i){
-
-return `
-<article class="game">
-
-<div class="cover">
-${emojis[i%emojis.length]}
-</div>
-
-<div class="gname">
-${n}
-</div>
-
-<button class="open"
-onclick="alert('${n.replace(/'/g,"\\'")} — game launch will be connected through the secure game/backend system.')">
-OPEN
-</button>
-
-</article>
-`;
+  showToast(
+    "৳110 Bonus Claim হয়েছে 🎁"
+  );
 
 }
 
-function renderGames(){
 
-let x=gameNames.map((n,i)=>gameHTML(n,i)).join('');
+/* =========================
+   DAILY CHECK-IN
+========================= */
 
-document.getElementById('allGames').innerHTML=x;
+function dailyCheckin(){
 
-document.getElementById('homeGames').innerHTML=
-gameNames.slice(0,12)
-.map((n,i)=>gameHTML(n,i))
-.join('');
+  const today=
+    new Date().toDateString();
+
+  if(state.checkin===today){
+
+    showToast(
+      "আজকের Check-in নেওয়া হয়েছে"
+    );
+
+    return;
+  }
+
+
+  state.checkin=today;
+
+  state.coins+=50;
+
+  saveState();
+
+  showToast(
+    "+50 Coins পাওয়া গেছে 🎁"
+  );
 
 }
 
-renderGames();
-refresh();
 
-document.getElementById('uid').textContent='Demo User';
+/* =========================
+   DAILY SPIN
+========================= */
+
+function dailySpin(){
+
+  const today=
+    new Date().toDateString();
+
+  if(state.spin===today){
+
+    showToast(
+      "আজকের Spin নেওয়া হয়েছে"
+    );
+
+    return;
+  }
+
+
+  state.spin=today;
+
+
+  const rewards=[
+    10,
+    20,
+    30,
+    50,
+    100
+  ];
+
+  const reward=
+    rewards[
+      Math.floor(
+        Math.random()*rewards.length
+      )
+    ];
+
+
+  state.coins+=reward;
+
+  saveState();
+
+  showToast(
+    "+"+reward+" Coins জিতেছেন 🎡"
+  );
+
+}
+
+
+/* =========================
+   REDEEM
+========================= */
+
+function redeemCode(){
+
+  const code=
+    document.getElementById("redeemCode")
+    .value.trim();
+
+  if(!code){
+
+    showToast("Redeem Code দিন");
+
+    return;
+  }
+
+
+  /*
+    Secure redeem-code verification
+    requires backend/admin system.
+  */
+
+  showToast(
+    "Redeem system backend-এর সাথে চালু হবে"
+  );
+
+}
+
+
+/* =========================
+   REFERRAL
+========================= */
+
+function copyReferral(){
+
+  const link=
+    "https://t.me/BDT666Bot?start=ref_demo";
+
+  if(navigator.clipboard){
+
+    navigator.clipboard.writeText(link)
+      .then(()=>{
+        showToast(
+          "Referral Link Copy হয়েছে ✓"
+        );
+      });
+
+  }else{
+
+    showToast(link);
+
+  }
+
+}
+
+
+/* =========================
+   LOGIN / REGISTER
+========================= */
+
+function loginRegister(){
+
+  showToast(
+    "Login/Register Backend-এর সাথে চালু হবে"
+  );
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+  const toast=
+    document.getElementById("toast");
+
+  toast.textContent=message;
+
+  toast.style.display="block";
+
+  setTimeout(()=>{
+
+    toast.style.display="none";
+
+  },2000);
+
+}
+
+
+/* =========================
+   GAMES
+========================= */
+
+const gamesContainer=
+  document.getElementById("gamesContainer");
+
+games.forEach((game,index)=>{
+
+  const div=
+    document.createElement("div");
+
+  div.className="game";
+
+  div.innerHTML=`
+
+    <div class="game-icon">
+      ${index%4===0?"🏴‍☠️":
+        index%4===1?"💰":
+        index%4===2?"🐉":"🎰"}
+    </div>
+
+    <b>${game}</b>
+
+    <div class="small" style="margin-top:6px">
+      Game
+    </div>
+
+    <button
+      class="dark-btn full"
+      onclick="openGame('${game.replace(/'/g,"\\'")}')">
+
+      Open
+
+    </button>
+
+  `;
+
+  gamesContainer.appendChild(div);
+
+});
+
+
+function openGame(name){
+
+  showToast(
+    name+" — Game Demo"
+  );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+updateUI();
 
 </script>
 
