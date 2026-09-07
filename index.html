@@ -1,1 +1,640 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>666BDT</title><style>*{box-sizing:border-box}body{margin:0;background:#090615;color:#fff;font-family:Arial,sans-serif}header{padding:16px;background:linear-gradient(135deg,#1a0930,#090615);border-bottom:1px solid #452467}.logo{font-size:30px;font-weight:900;color:#f6c85f}.sub{color:#c7b6d5}.balance{margin-top:14px;padding:18px;border-radius:20px;background:linear-gradient(135deg,#6c2bd9,#d69b25)}.cash{font-size:32px;font-weight:900;margin:5px 0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.actions button,.bonus button{padding:12px;border:0;border-radius:12px;font-weight:800}.deposit{background:#f6c85f}.withdraw{background:#fff}.notice,.bonus{margin:12px 0;padding:14px;border:1px solid #452467;border-radius:15px;background:#140d23}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.game{padding:8px;border-radius:15px;background:#120b1d;border:1px solid #322044}.pic{height:105px;border-radius:10px;display:grid;place-items:center;font-size:48px;background:radial-gradient(circle,#63309b,#20102f)}.gname{height:32px;margin:8px 2px;font-size:13px;font-weight:800;overflow:hidden}.game button{width:100%;padding:9px;border:0;border-radius:9px;background:#f6c85f;font-weight:900}main{padding:16px 16px 85px}.page{display:none}.page.active{display:block}nav{position:fixed;bottom:0;left:0;right:0;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);padding:8px;background:#110a1c;border-top:1px solid #452467}nav button{background:none;border:0;color:#c7b6d5;padding:5px}nav button.active{color:#f6c85f}input{width:100%;padding:12px;border-radius:12px;border:1px solid #452467;background:#120b1d;color:#fff}.pills{display:flex;flex-wrap:wrap;gap:8px}.pill{padding:9px 12px;border:1px solid #452467;border-radius:10px;background:#120b1d;color:#fff}.row{display:flex;justify-content:space-between;margin:8px 0}</style></head><body><header><div class="logo">666BDT</div><div class="sub">Play • Bonus • Rewards</div><div class="balance"><small>Cash Balance</small><div class="cash">৳0.00</div><small>Coins: 0</small><div class="actions"><button class="deposit" onclick="alert('Deposit screen — backend will be connected next')">+ DEPOSIT</button><button class="withdraw" onclick="alert('Withdraw screen — backend will be connected next')">− WITHDRAW</button></div></div></header><main><section id="home" class="page active"><div class="notice">📢 666BDT Welcome Notice</div><div class="bonus"><div class="row"><b>🎁 Daily Check-in</b><b>+50 Coins</b></div><button onclick="alert('Daily check-in prototype')">CLAIM BONUS</button></div><div class="bonus"><div class="row"><b>🎡 Daily Spin</b><b>Once / day</b></div><button onclick="alert('Spin prototype')">SPIN NOW</button></div><div class="bonus"><div class="row"><b>🎟️ Redeem Code</b><span>Rewards</span></div><button onclick="redeem()">REDEEM</button></div><h2>🔥 Featured Games</h2><div class="grid" id="featured"></div></section><section id="games" class="page"><h2>🎮 All Games</h2><input id="search" placeholder="Search games..." oninput="filterGames()"><br><br><div class="grid" id="gamesGrid"></div></section><section id="wallet" class="page"><h2>💰 Wallet</h2><div class="bonus"><div class="row"><span>Cash</span><b>৳0.00</b></div><div class="row"><span>Coins</span><b>0</b></div></div><div class="bonus"><b>Deposit / Withdraw</b><p>Amounts: 100, 200, 500, 1,000, 2,000, 5,000, 10,000, 20,000, 30,000</p><div class="pills"><span class="pill">bKash</span><span class="pill">Nagad</span></div></div></section><section id="profile" class="page"><h2>👤 Profile</h2><div class="bonus"><div class="row"><span>Telegram Name</span><b>User</b></div><div class="row"><span>User ID</span><b>Not connected</b></div><div class="row"><span>Account</span><b>Active</b></div></div><div class="bonus"><b>👥 Referral Bonus</b><p>150 coins after a referred user successfully deposits 1,000 coins.</p></div><div class="bonus"><b>💎 First Deposit Bonus</b><p>50% once on the first successful deposit.</p></div></section></main><nav><button class="active" onclick="show('home',this)">🏠<br>Home</button><button onclick="show('games',this)">🎮<br>Games</button><button onclick="show('wallet',this)">💰<br>Wallet</button><button onclick="show('profile',this)">👤<br>Profile</button></nav><script>const games=[['Pirate Legends','🏴‍☠️'],['Mega Bandit','💰'],['Dragon Gems Clash','🐉'],['Royal Ace','♠️'],['Dragon Gems Wheel','🎡'],['Goldliner','🚂'],['Crazy Money','💵'],['Sexy Joker','🃏'],['Super Ace','♠️'],['Showdown','⚔️'],['Aviator','✈️'],['Super Ace Deluxe','👑'],['Bounty Clash','💥'],['Circus Joker 4096','🎪'],['Fortune Garda 500','🍀'],['Boxing King','🥊'],['Fortune Gems 3','💎'],['Aztec','🗿'],['Anubis Wrath','🐺'],['Chicken Road 2','🐔'],['Wild Bandito','🤠'],['Lucky Neko','🐱'],['Crazy Time','⏰'],['Spin','🎡'],['Salt Game','🧂'],['Ludo Game','🎲'],['Teen Patti','🃏'],['3 Patti','🃏'],['Live Crash','📈'],['Mines','💣'],['Racing','🏎️'],['Football','⚽'],['Basketball','🏀'],['Rummy','🃏'],['Andar Bahar','🎴'],['Baccarat','🎴']];function cards(){return games.map(g=>`<article class="game"><div class="pic">${g[1]}</div><div class="gname">${g[0]}</div><button onclick="openGame('${g[0]}')">OPEN</button></article>`).join('')}document.getElementById('featured').innerHTML=games.slice(0,12).map(g=>`<article class="game"><div class="pic">${g[1]}</div><div class="gname">${g[0]}</div><button onclick="openGame('${g[0]}')">OPEN</button></article>`).join('');document.getElementById('gamesGrid').innerHTML=cards();function show(id,b){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');scrollTo(0,0)}function openGame(n){alert(n+' selected. Game integration will be connected in the backend.')}function redeem(){let c=prompt('Redeem Code');if(c)alert('Code submitted: '+c)}function filterGames(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('#gamesGrid .game').forEach(x=>x.style.display=x.innerText.toLowerCase().includes(q)?'block':'none')}</script></body></html>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>666BDT • Play • Bonus • Rewards</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#070417;--card:#11102a;--line:#38206d;--purple:#8b2cff;--gold:#ffd447;--pink:#ff35b5;--text:#fff;--muted:#bcb4d7}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,system-ui,sans-serif}
+body{min-height:100vh;background:radial-gradient(circle at 80% 0%,#2d0960 0,transparent 30%),radial-gradient(circle at 10% 35%,#17052e 0,transparent 35%),var(--bg)}
+button,input{font:inherit}button{cursor:pointer}
+.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:82px}
+.top{padding:18px 18px 8px;display:flex;align-items:center;gap:14px}
+.menu{font-size:30px;background:none;border:0;color:#fff;width:42px}
+.logoBox{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-size:36px;background:linear-gradient(135deg,#8c2cff,#f0a52d);box-shadow:0 0 28px #7b21c855}
+.brand{flex:1}.brand h1{margin:0;color:var(--gold);font-size:30px}.brand p{margin:3px 0;color:#cfc5e7;font-size:16px}
+.iconBtn{width:44px;height:44px;border-radius:50%;border:1px solid #5e2db0;background:#3516a2;color:#fff;font-size:22px}
+.wrap{padding:0 18px}
+.balance{margin:10px 0 18px;padding:22px;border-radius:30px;background:linear-gradient(125deg,#681eff,#bd42b5 58%,#ffb51e);position:relative;overflow:hidden;box-shadow:0 12px 35px #6c20a844}
+.balance:after{content:"🪙";position:absolute;right:24px;top:35px;font-size:74px}
+.label{font-size:17px;color:#eee}.cash{font-size:46px;font-weight:900;margin:3px 0 6px}.coins{font-size:18px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.actions button{padding:14px;border-radius:17px;border:0;font-weight:900;font-size:17px}
+.deposit{background:var(--gold);color:#171022}.withdraw{background:#fff;color:#171022}
+.notice{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#0f0b20;white-space:nowrap;overflow:hidden}
+.notice span{display:inline-block;animation:scroll 12s linear infinite}
+@keyframes scroll{from{transform:translateX(100%)}to{transform:translateX(-120%)}}
+.quickTitle,.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}
+.sectionTitle h2,.quickTitle h2{margin:0;font-size:27px}.count{color:#b979ff}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.quick button{min-height:95px;border-radius:20px;border:1px solid var(--line);background:#0d0a20;color:#ddd;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.quick b{font-size:31px}.quick small{font-size:13px}
+.categories{display:flex;gap:9px;overflow:auto;padding-bottom:5px}
+.cat{white-space:nowrap;padding:10px 18px;border-radius:22px;border:1px solid var(--line);background:#0d0a20;color:#bbb}
+.cat.active{background:linear-gradient(90deg,#8b2cff,#c43bdf);color:#fff;border-color:#a45cff}
+.games{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.game{border:1px solid #352064;background:#0d0a1e;border-radius:20px;padding:8px;overflow:hidden}
+.cover{height:145px;border-radius:15px;display:grid;place-items:center;font-size:48px;font-weight:900;background:linear-gradient(135deg,#29105b,#9b1fc8 55%,#ef9e20);position:relative}
+.cover:after{content:"666BDT";position:absolute;bottom:7px;left:10px;font-size:11px;opacity:.7}
+.gname{padding:10px 4px 7px;font-weight:900;font-size:14px;height:47px;overflow:hidden}
+.open{width:100%;padding:10px;border:0;border-radius:12px;background:linear-gradient(90deg,#ffd447,#ff9c2b);font-weight:900;color:#171022}
+.page{display:none}.page.active{display:block}
+.card{margin:12px 0;padding:18px;border:1px solid var(--line);border-radius:20px;background:#100b21}
+.row{display:flex;justify-content:space-between;gap:12px;margin:10px 0}
+.bonusBtn{padding:12px 16px;border:0;border-radius:13px;background:#fff;color:#111;font-weight:900}
+.profile{padding-bottom:20px}
+.avatar{width:78px;height:78px;border-radius:50%;margin:10px auto;background:linear-gradient(135deg,#8b2cff,#2d11bd);display:grid;place-items:center;font-size:42px}
+.center{text-align:center}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:20;max-width:720px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:9px 5px calc(9px + env(safe-area-inset-bottom));background:#0a0717ee;border-top:1px solid #3b2170;backdrop-filter:blur(12px)}
+nav button{background:none;border:0;color:#aaa;padding:4px;font-size:12px}
+nav b{display:block;font-size:23px;margin-bottom:3px}
+nav button.active{color:var(--gold)}
+.modal{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:flex-end;justify-content:center}
+.modal.show{display:flex}
+.sheet{width:100%;max-width:720px;max-height:92vh;overflow:auto;background:#101127;border:1px solid #3e2b6d;border-radius:28px 28px 0 0;padding:20px 18px 30px;box-shadow:0 -20px 60px #000}
+.sheetHead{display:flex;justify-content:space-between;align-items:center}
+.close{width:42px;height:42px;border:0;border-radius:50%;background:#24263f;color:#fff;font-size:25px}
+.methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.method{padding:15px;border-radius:16px;border:2px solid #3d2a68;background:#15142e;color:#fff;text-align:left}
+.method.selected{border-color:#ff46b8;background:#24113c}
+.method b{font-size:17px}.num{font-size:14px;color:#ff55bd;margin-top:5px}
+.field{width:100%;padding:14px;border:1px solid #34245d;border-radius:14px;background:#080817;color:#fff;outline:none;margin-top:10px}
+.submit{width:100%;margin-top:14px;padding:15px;border:0;border-radius:16px;background:linear-gradient(90deg,#ff9f1c,#a62cff);color:#fff;font-weight:900}
+.hint{padding:14px;border-radius:16px;background:#17172f;color:#c7c3d8;font-size:13px;line-height:1.5;margin-top:12px}
+.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.amount{padding:13px 5px;border-radius:13px;border:1px solid var(--line);background:#0b0820;color:#fff;font-weight:900}
+.amount.selected{background:#8d28ff;border-color:#e56cff}
+@media(min-width:600px){.games{grid-template-columns:repeat(3,1fr)}.cover{height:160px}}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="top">
+<button class="menu">☰</button>
+<div class="logoBox">💰</div>
+<div class="brand">
+<h1>666BDT</h1>
+<p>Play • Bonus • Rewards</p>
+</div>
+<button class="iconBtn">🔔</button>
+<button class="iconBtn">👤</button>
+</header>
+
+<main class="wrap">
+
+<section id="home" class="page active">
+
+<div class="balance">
+<div class="label">Available Balance</div>
+<div class="cash">৳ <span id="cash">0.00</span></div>
+<div class="coins">🪙 <span id="coins">0</span> Coins</div>
+
+<div class="actions">
+<button class="deposit" onclick="openPay('deposit')">💳 + DEPOSIT</button>
+<button class="withdraw" onclick="openPay('withdraw')">💸 − WITHDRAW</button>
+</div>
+</div>
+
+<div class="notice">
+<span>📢 Welcome to 666BDT • Play • Bonus • Rewards • Daily Check-in • Daily Spin • Redeem Code</span>
+</div>
+
+<div class="quickTitle">
+<h2>⚡ Quick Access</h2>
+</div>
+
+<div class="quick">
+<button onclick="openPay('deposit')"><b>💳</b><small>Deposit</small></button>
+<button onclick="claimBonus()"><b>🎁</b><small>Daily Bonus</small></button>
+<button onclick="showPage('profile')"><b>👥</b><small>Referral</small></button>
+<button onclick="alert('Leaderboard coming with backend.')"><b>🏆</b><small>Ranking</small></button>
+</div>
+
+<div class="sectionTitle">
+<h2>🔥 Games</h2>
+<span class="count">66 games</span>
+</div>
+
+<div class="categories">
+<button class="cat active">All</button>
+<button class="cat">Live</button>
+<button class="cat">Slots</button>
+<button class="cat">Arcade</button>
+<button class="cat">Board</button>
+</div>
+
+<div id="homeGames" class="games"></div>
+
+</section>
+
+<section id="games" class="page">
+
+<div class="sectionTitle">
+<h2>🎮 All Games</h2>
+</div>
+
+<div class="categories">
+<button class="cat active">All</button>
+<button class="cat">Live</button>
+<button class="cat">Slots</button>
+<button class="cat">Arcade</button>
+</div>
+
+<div id="allGames" class="games"></div>
+
+</section>
+
+<section id="wallet" class="page">
+
+<div class="sectionTitle">
+<h2>💰 Wallet</h2>
+</div>
+
+<div class="card">
+<div class="row">
+<span>Cash Balance</span>
+<b>৳ <span id="cash2">0.00</span></b>
+</div>
+
+<div class="row">
+<span>Coins</span>
+<b><span id="coins2">0</span></b>
+</div>
+</div>
+
+<div class="card">
+<h3>Deposit / Withdraw</h3>
+<p>Payment method: <b>bKash</b> / <b>Nagad</b></p>
+
+<div class="actions">
+<button class="deposit" onclick="openPay('deposit')">+ Deposit</button>
+<button class="withdraw" onclick="openPay('withdraw')">− Withdraw</button>
+</div>
+</div>
+
+<div class="card">
+<div class="row">
+<b>🎁 Daily Check-in</b>
+<b>+50 Coins</b>
+</div>
+<button class="bonusBtn" onclick="claimBonus()">CLAIM BONUS</button>
+</div>
+
+<div class="card">
+<div class="row">
+<b>🎡 Daily Spin</b>
+<b>Once / day</b>
+</div>
+<button class="bonusBtn" onclick="spin()">SPIN NOW</button>
+</div>
+
+<div class="card">
+<div class="row">
+<b>🎟️ Redeem Code</b>
+<span>Rewards</span>
+</div>
+<button class="bonusBtn" onclick="redeem()">REDEEM</button>
+</div>
+
+</section>
+
+<section id="profile" class="page profile">
+
+<div class="card center">
+<div class="avatar">👤</div>
+<h2>Telegram User</h2>
+<p>User ID: <span id="uid">Demo</span></p>
+<p>Account Status: <b style="color:#58e49a">Active</b></p>
+</div>
+
+<div class="card">
+<div class="row">
+<span>Referral ID</span>
+<b>666BDT-DEMO</b>
+</div>
+
+<div class="row">
+<span>Referral Reward</span>
+<b>150 Coins</b>
+</div>
+
+<p style="color:#bbb">
+Referral reward is intended to be credited only after the qualifying deposit is verified by the secure backend.
+</p>
+</div>
+
+<div class="card">
+<h3>🛟 Support</h3>
+<button class="submit" onclick="alert('Connect your official Telegram support link in the backend.')">
+OPEN SUPPORT
+</button>
+</div>
+
+</section>
+
+</main>
+
+<nav>
+
+<button class="active" data-page="home" onclick="showPage('home')">
+<b>🏠</b>Home
+</button>
+
+<button data-page="games" onclick="showPage('games')">
+<b>🎮</b>Games
+</button>
+
+<button data-page="wallet" onclick="showPage('wallet')">
+<b>💰</b>Wallet
+</button>
+
+<button data-page="profile" onclick="showPage('profile')">
+<b>👤</b>Profile
+</button>
+
+</nav>
+</div>
+
+<div id="payModal" class="modal" onclick="if(event.target===this)closePay()">
+
+<div class="sheet">
+
+<div class="sheetHead">
+<h2 id="payTitle">💳 Deposit Coins</h2>
+<button class="close" onclick="closePay()">×</button>
+</div>
+
+<div class="hint">
+প্রথমে <b>bKash</b> অথবা <b>Nagad</b> নির্বাচন করুন, তারপর Amount নির্বাচন করুন।
+এই HTMLটি UI prototype; বাস্তব payment/withdrawal backend verification ছাড়া এখানে টাকা প্রসেস হবে না।
+</div>
+
+<div class="methods">
+
+<button id="bk" class="method" onclick="selectMethod('bKash')">
+💗 <b>bKash</b>
+<div class="num">01935654366</div>
+</button>
+
+<button id="ng" class="method" onclick="selectMethod('Nagad')">
+🟠 <b>Nagad</b>
+<div class="num">01873570387</div>
+</button>
+
+</div>
+
+<h3>🪙 Select Amount</h3>
+
+<div id="amounts" class="amounts"></div>
+
+<input id="ref" class="field" placeholder="Payment reference / transaction ID">
+
+<div class="hint">
+• Selected number-এ <b>Send Money</b> ব্যবহার করুন।<br>
+• bKash/Nagad নির্বাচন করে তারপর Submit দিন।<br>
+• বাস্তব credit/withdrawal secure backend ও admin verification-এর মাধ্যমে করতে হবে।
+</div>
+
+<button id="submitBtn" class="submit" onclick="submitPay()">
+SUBMIT REQUEST
+</button>
+
+</div>
+</div>
+
+<script>
+
+const amounts=[
+100,200,500,1000,2000,5000,10000,20000,30000
+];
+
+let action='deposit';
+let method='';
+let amount=0;
+
+let coins=Number(localStorage.getItem('666_coins')||0);
+
+function money(){
+return (coins/10).toFixed(2);
+}
+
+function refresh(){
+
+document.querySelectorAll('#coins,#coins2').forEach(x=>{
+x.textContent=coins.toLocaleString();
+});
+
+document.querySelectorAll('#cash,#cash2').forEach(x=>{
+x.textContent=money();
+});
+
+}
+
+function save(){
+
+localStorage.setItem('666_coins',coins);
+refresh();
+
+}
+
+function showPage(id){
+
+document.querySelectorAll('.page').forEach(x=>{
+x.classList.remove('active');
+});
+
+document.getElementById(id).classList.add('active');
+
+document.querySelectorAll('nav button').forEach(x=>{
+x.classList.toggle('active',x.dataset.page===id);
+});
+
+window.scrollTo(0,0);
+
+}
+
+function openPay(a){
+
+action=a;
+method='';
+amount=0;
+
+document.getElementById('payTitle').textContent=
+a==='deposit'
+?'💳 Deposit Coins'
+:'💸 Withdraw Coins';
+
+document.getElementById('submitBtn').textContent=
+a==='deposit'
+?'SUBMIT DEPOSIT REQUEST'
+:'SUBMIT WITHDRAWAL REQUEST';
+
+document.getElementById('payModal').classList.add('show');
+
+document.getElementById('ref').value='';
+
+selectMethod('');
+
+renderAmounts();
+
+}
+
+function closePay(){
+
+document.getElementById('payModal').classList.remove('show');
+
+}
+
+function selectMethod(m){
+
+method=m;
+
+document.getElementById('bk')
+.classList.toggle('selected',m==='bKash');
+
+document.getElementById('ng')
+.classList.toggle('selected',m==='Nagad');
+
+}
+
+function renderAmounts(){
+
+document.getElementById('amounts').innerHTML=
+amounts.map(a=>`
+<button class="amount ${a===amount?'selected':''}"
+onclick="chooseAmount(${a})">
+${a.toLocaleString()}
+</button>
+`).join('');
+
+}
+
+function chooseAmount(a){
+
+amount=a;
+renderAmounts();
+
+}
+
+function submitPay(){
+
+if(!method){
+alert('আগে bKash অথবা Nagad নির্বাচন করুন।');
+return;
+}
+
+if(!amount){
+alert('আগে Amount নির্বাচন করুন।');
+return;
+}
+
+if(action==='deposit' &&
+!document.getElementById('ref').value.trim()){
+
+alert('Payment reference / transaction ID দিন।');
+return;
+
+}
+
+alert(
+(action==='deposit'?'Deposit':'Withdraw')+
+' request তৈরি হয়েছে। এটি এখনো backend-এ বাস্তবে প্রসেস হচ্ছে না।'
+);
+
+closePay();
+
+}
+
+function claimBonus(){
+
+let d=new Date().toISOString().slice(0,10);
+
+if(localStorage.getItem('666_bonus')===d){
+
+alert('আজকের Daily Check-in ইতিমধ্যে নেওয়া হয়েছে।');
+return;
+
+}
+
+coins+=50;
+
+localStorage.setItem('666_bonus',d);
+
+save();
+
+alert('+50 Coins যোগ হয়েছে!');
+
+}
+
+function spin(){
+
+let d=new Date().toISOString().slice(0,10);
+
+if(localStorage.getItem('666_spin')===d){
+
+alert('আজকের Spin ইতিমধ্যে ব্যবহার করা হয়েছে।');
+return;
+
+}
+
+let rewards=[10,20,30,50,100];
+
+let r=rewards[Math.floor(Math.random()*rewards.length)];
+
+coins+=r;
+
+localStorage.setItem('666_spin',d);
+
+save();
+
+alert('🎉 আপনি '+r+' Coins জিতেছেন!');
+
+}
+
+function redeem(){
+
+let c=prompt('Redeem Code লিখুন');
+
+if(!c)return;
+
+alert(
+'Code verification secure backend-এ সংযুক্ত হলে reward credit হবে।'
+);
+
+}
+
+const gameNames=[
+
+'Pirate Legends',
+'Mega Bandit',
+'Dragon Gems Clash',
+'Royal Ace',
+'Dragon Gems Wheel',
+'Goldliner',
+'Crazy Money',
+'Sexy Joker',
+'Dragon Gems Super Buy',
+'Royal Hunter',
+'Dragon Gems',
+'Golden Aztec Mega',
+'Super Egypt',
+'Golden Ace',
+'Magical Alchemist',
+'Super Ace',
+'Showdown',
+'Aviator',
+'Super Ace Deluxe',
+'Super Ace 2 Stack',
+'Bounty Clash',
+'Circus Joker 4096',
+'Fortune Garda 500',
+'Super Elements',
+'Boxing King',
+'Fortune Gems 3',
+'Shoot',
+'Aztec',
+'Magic Ace Wild Lock',
+'Anubis Wrath',
+'Pinata Wins',
+'Chicken Road 2',
+'Fortune Gems 500',
+'Mega Ace',
+'Wild Bandito',
+'Fortune Gems 2',
+'Money Coming',
+'Lucky Neko',
+'Limited Game',
+'Goldmine Express',
+'Lucky Pirate',
+'Chinese New Year More Ways',
+'Double Fortune',
+'Crazy Time',
+'Spin',
+'Salt Game',
+'Ludo Game',
+'Teen Patti',
+'3 Patti',
+'Live Crash',
+'Teen Patti Live',
+'3 Patti Live',
+'Slots',
+'Dice',
+'Spin Wheel',
+'Card Game',
+'Target',
+'Puzzle',
+'Brick Breaker',
+'Flying Game',
+'Runner',
+'Mines',
+'Coin Catch',
+'Tower Game',
+'Racing',
+'Football',
+'Basketball'
+
+];
+
+const emojis=[
+
+'🏴‍☠️','🎰','🐉','🃏','🎡','🪙','💰','🃏',
+'🐲','🏹','🐉','🏺','🐫','🂡','🧪','🃏',
+'🥊','✈️','🃏','🔥','💥','🤡','💎','⚡',
+'🥊','💎','🎯','🏺','🪄','🐺','🎁','🐔',
+'💎','🃏','🤠','💎','💵','🐱','🎮','⛏️',
+'🏴‍☠️','🧧','🍀','⏱️','🎡','🧂','🎲','🃏',
+'🃏','💥','🃏','🎰','🎲','🎡','🃏','🎯',
+'🧩','🧱','🪽','🏃','💣','🪙','🗼','🏎️',
+'⚽','🏀'
+
+];
+
+function gameHTML(n,i){
+
+return `
+<article class="game">
+
+<div class="cover">
+${emojis[i%emojis.length]}
+</div>
+
+<div class="gname">
+${n}
+</div>
+
+<button class="open"
+onclick="alert('${n.replace(/'/g,"\\'")} — game launch will be connected through the secure game/backend system.')">
+OPEN
+</button>
+
+</article>
+`;
+
+}
+
+function renderGames(){
+
+let x=gameNames.map((n,i)=>gameHTML(n,i)).join('');
+
+document.getElementById('allGames').innerHTML=x;
+
+document.getElementById('homeGames').innerHTML=
+gameNames.slice(0,12)
+.map((n,i)=>gameHTML(n,i))
+.join('');
+
+}
+
+renderGames();
+refresh();
+
+document.getElementById('uid').textContent='Demo User';
+
+</script>
+
+</body>
+</html>
