@@ -1,324 +1,473 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>666BDT</title>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
-margin:0;
-background:#090812;
-color:#fff;
-font-family:Arial,sans-serif
+  background:#090512;
+  color:#fff;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+}
+
+button,input{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
 }
 
 .app{
-max-width:520px;
-margin:auto;
-min-height:100vh;
-background:linear-gradient(#120d25,#090812);
-padding-bottom:80px
+  width:100%;
+  max-width:760px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:82px;
 }
 
-header{
-padding:18px 15px;
-display:flex;
-justify-content:space-between;
-position:sticky;
-top:0;
-background:#120d25ee;
-z-index:5
+/* HEADER */
+
+.header{
+  padding:22px 20px 15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .logo{
-font-size:25px;
-font-weight:900;
-color:#d7a0ff
+  font-size:31px;
+  font-weight:900;
+  color:#c98aff;
 }
 
-.sub{
-font-size:11px;
-color:#aaa
+.tagline{
+  color:#aaa0b7;
+  margin-top:4px;
 }
 
 .bell{
-background:#211936;
-color:white;
-padding:10px;
-border:0;
-border-radius:12px
+  width:52px;
+  height:52px;
+  border:0;
+  border-radius:17px;
+  background:#21132f;
+  color:#ffd33d;
+  font-size:23px;
 }
 
-main{
-padding:10px 14px
+/* BALANCE */
+
+.balance-card{
+  margin:0 20px 16px;
+  padding:22px;
+  border-radius:28px;
+  border:1px solid #55267f;
+  background:
+    radial-gradient(circle at 10% 10%,#55268b,transparent 45%),
+    linear-gradient(135deg,#211039,#35155c,#4c2673);
 }
 
-.hero{
-padding:20px;
-border-radius:22px;
-background:linear-gradient(135deg,#402277,#171334);
-border:1px solid #6840a3
-}
-
-.hero h2{
-margin:0 0 6px
-}
-
-.hero p{
-color:#aaa;
-font-size:12px
+.balance-label{
+  color:#c9bdd4;
+  font-size:14px;
 }
 
 .balance{
-font-size:30px;
-font-weight:bold
+  font-size:39px;
+  font-weight:900;
+  margin:5px 0 18px;
 }
 
-.actions{
-display:flex;
-gap:9px;
-margin-top:14px
+.action-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
 }
 
-.btn{
-flex:1;
-padding:12px;
-font-weight:bold;
-color:white;
-background:linear-gradient(135deg,#713be0,#a12bff);
-border:0;
-border-radius:12px
+.action-grid button{
+  border:0;
+  border-radius:18px;
+  padding:16px 8px;
+  font-size:18px;
+  font-weight:900;
 }
 
-.gold{
-background:linear-gradient(135deg,#b87719,#e8b33e);
-color:#160d00
+.deposit-btn{
+  background:linear-gradient(90deg,#7634e5,#ad25ff);
+  color:#fff;
 }
+
+.withdraw-btn{
+  background:linear-gradient(90deg,#c78a1b,#f2bd37);
+  color:#171006;
+}
+
+/* NOTICE */
 
 .notice{
-margin:13px 0;
-padding:11px;
-border-radius:12px;
-background:#171327;
-border:1px solid #382b51;
-font-size:12px
+  margin:0 20px 18px;
+  padding:15px;
+  border:1px solid #30223e;
+  border-radius:18px;
+  background:#120b1d;
+  color:#ddd4e5;
+  white-space:nowrap;
+  overflow:hidden;
 }
+
+/* TABS */
 
 .tabs{
-display:flex;
-gap:7px;
-overflow:auto
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:0 20px 15px;
 }
 
-.tab{
-white-space:nowrap;
-padding:8px 12px;
-background:#171327;
-color:#aaa;
-border:0;
-border-radius:20px
+.tabs::-webkit-scrollbar{
+  height:3px;
 }
 
-.tab.active{
-background:#703bd2;
-color:#fff
+.tabs button{
+  white-space:nowrap;
+  border:0;
+  border-radius:25px;
+  padding:11px 18px;
+  background:#151020;
+  color:#aaa2b2;
+  font-size:15px;
 }
 
-h3{
-font-size:17px;
-margin:20px 0 10px
+.tabs button.active{
+  background:#783de0;
+  color:#fff;
 }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px
+/* SECTION */
+
+section{
+  padding:0 20px;
 }
 
-.game{
-background:#171127;
-border:1px solid #332650;
-border-radius:16px;
-overflow:hidden
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:18px 0 12px;
 }
 
-.pic{
-height:90px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:42px;
-background:radial-gradient(circle,#6b36ad,#171127)
+.section-title h2{
+  font-size:22px;
 }
 
-.ginfo{
-padding:9px
+.section-title span{
+  color:#b98aff;
+  font-size:13px;
 }
 
-.gname{
-font-size:13px;
-font-weight:bold
+/* GAMES */
+
+.games{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
 }
 
-.play{
-width:100%;
-margin-top:7px;
-padding:7px;
-border:0;
-border-radius:8px;
-background:#703bd2;
-color:#fff;
-font-size:11px;
-font-weight:bold
+.game-card{
+  overflow:hidden;
+  border:1px solid #302044;
+  border-radius:20px;
+  background:#120c1e;
 }
 
-nav{
-position:fixed;
-bottom:0;
-left:50%;
-transform:translateX(-50%);
-width:min(520px,100%);
-display:flex;
-justify-content:space-around;
-padding:9px;
-background:#120d25ee;
-border-top:1px solid #342650
+.game-image{
+  height:145px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 50% 40%,#6938a1,#28153f 72%);
 }
 
-nav button{
-background:none;
-color:#999;
-font-size:11px;
-border:0
+.game-image svg{
+  width:105px;
+  height:105px;
 }
 
-nav b{
-display:block;
-font-size:18px
+.game-body{
+  padding:12px;
 }
 
-nav button.active{
-color:#c28aff
+.game-name{
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  font-weight:800;
 }
+
+.play-btn{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:12px;
+  margin-top:7px;
+  background:#773bdd;
+  color:#fff;
+  font-weight:900;
+}
+
+/* BOTTOM */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(760px,100%);
+  height:74px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#10091bee;
+  border-top:1px solid #2d213d;
+  backdrop-filter:blur(12px);
+  z-index:20;
+}
+
+.bottom-nav button{
+  border:0;
+  background:transparent;
+  color:#968da1;
+}
+
+.bottom-nav button.active{
+  color:#c083ff;
+}
+
+.bottom-icon{
+  display:block;
+  font-size:22px;
+}
+
+.bottom-text{
+  font-size:12px;
+}
+
+/* MODAL */
 
 .modal{
-display:none;
-position:fixed;
-inset:0;
-background:#000b;
-z-index:20;
-align-items:flex-end
+  position:fixed;
+  inset:0;
+  background:#000b;
+  display:none;
+  align-items:flex-end;
+  z-index:50;
 }
 
 .modal.show{
-display:flex
+  display:flex;
 }
 
 .sheet{
-width:min(520px,100%);
-margin:auto 0 0;
-background:#130f21;
-border-radius:23px 23px 0 0;
-padding:18px;
-border:1px solid #3b2c55
+  width:min(760px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#130d21;
+  border:1px solid #3c2855;
+  border-radius:28px 28px 0 0;
+  padding:22px 20px 30px;
 }
 
-.close{
-float:right;
-background:#282039;
-color:#fff;
-border:0;
-border-radius:9px;
-padding:8px
+.sheet-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
 }
 
-.paycards{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:9px
+.sheet-header h2{
+  font-size:25px;
 }
 
-.pay{
-padding:12px;
-background:#1b162c;
-border:1px solid #382d4e;
-border-radius:12px
+.close-btn{
+  width:43px;
+  height:43px;
+  border:0;
+  border-radius:12px;
+  background:#261936;
+  color:#fff;
+  font-size:25px;
 }
 
-.pay.sel{
-border-color:#a66cff
+/* PAYMENT */
+
+.payment-methods{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:12px;
 }
 
-.num{
-color:#ffd55c;
-font-weight:bold;
-margin-top:5px
+.method{
+  border:1px solid #322444;
+  border-radius:15px;
+  background:#191226;
+  color:#fff;
+  padding:15px;
+  text-align:left;
+  font-weight:800;
 }
 
-.copy{
-font-size:10px;
-color:#aaa
+.method.active{
+  border-color:#a65bff;
+  background:#25133d;
 }
 
-.amounts{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin:12px 0
+.payment-number{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:13px;
+  border:1px solid #322444;
+  border-radius:15px;
+  background:#0e0916;
+  margin:9px 0;
+}
+
+.payment-number b{
+  flex:1;
+}
+
+.copy-btn{
+  border:0;
+  border-radius:10px;
+  padding:9px 11px;
+  background:#7138d0;
+  color:#fff;
+}
+
+/* AMOUNTS */
+
+.amount-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin:13px 0;
 }
 
 .amount{
-padding:9px;
-background:#19142a;
-color:#fff;
-border:1px solid #392e50;
-border-radius:10px
+  border:1px solid #322444;
+  border-radius:14px;
+  padding:13px 5px;
+  background:#181124;
+  color:#fff;
 }
 
-.amount.sel{
-background:#703bd2
+.amount.active{
+  background:#783cdd;
+  border-color:#a45bff;
 }
 
-input{
-width:100%;
-padding:12px;
-margin:5px 0 10px;
-border-radius:10px;
-border:1px solid #3b3050;
-background:#0d0a15;
-color:#fff
+/* INPUT */
+
+.input{
+  width:100%;
+  padding:15px;
+  border:1px solid #342548;
+  border-radius:15px;
+  outline:none;
+  background:#0d0814;
+  color:#fff;
+  margin:8px 0;
 }
 
-.status{
-padding:10px;
-background:#181329;
-border-radius:10px;
-font-size:12px;
-margin:10px 0
+.help{
+  color:#aaa1b1;
+  font-size:13px;
+  line-height:1.5;
+  margin:7px 0;
 }
 
-.note{
-color:#aaa;
-font-size:12px;
-margin:8px 0
+.submit-btn{
+  width:100%;
+  padding:16px;
+  border:0;
+  border-radius:15px;
+  background:linear-gradient(90deg,#eda91f,#f5c542);
+  color:#171006;
+  font-weight:900;
+  margin-top:10px;
 }
+
+/* PROFILE */
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.profile-box{
+  margin:20px;
+  padding:20px;
+  border:1px solid #30213f;
+  border-radius:20px;
+  background:#151022;
+}
+
+.profile-box h2{
+  margin-bottom:12px;
+}
+
+.profile-box p{
+  color:#bbb1c3;
+  margin:8px 0;
+}
+
+.bonus-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:12px;
+  margin-top:8px;
+  background:#28173d;
+  color:#fff;
+}
+
+/* TOAST */
 
 .toast{
-display:none;
-position:fixed;
-bottom:80px;
-left:50%;
-transform:translateX(-50%);
-background:#28203b;
-padding:10px 14px;
-border-radius:10px;
-z-index:30;
-font-size:12px
+  position:fixed;
+  left:50%;
+  bottom:90px;
+  transform:translateX(-50%);
+  background:#28163a;
+  border:1px solid #71449d;
+  padding:12px 17px;
+  border-radius:13px;
+  display:none;
+  z-index:100;
+  white-space:nowrap;
+}
+
+@media(min-width:650px){
+  .games{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .game-image{
+    height:160px;
+  }
 }
 </style>
 </head>
@@ -327,387 +476,1162 @@ font-size:12px
 
 <div class="app">
 
-<header>
-<div>
-<div class="logo">666BDT</div>
-<div class="sub">Play • Bonus • Rewards</div>
-</div>
-
-<button class="bell">🔔</button>
+<header class="header">
+  <div>
+    <div class="logo">666BDT</div>
+    <div class="tagline">Play • Bonus • Rewards</div>
+  </div>
+  <button class="bell" onclick="showToast('Notifications')">🔔</button>
 </header>
 
-<main>
+<!-- HOME -->
 
-<section class="hero">
+<div id="homePage" class="page active">
 
-<h2>স্বাগতম 666BDT 🎮</h2>
+<div class="balance-card">
+  <div class="balance-label">আপনার ব্যালেন্স</div>
+  <div class="balance" id="balance">৳0</div>
 
-<p>আপনার ব্যালেন্স</p>
-
-<div class="balance">
-৳ <span id="bal">0</span>
+  <div class="action-grid">
+    <button class="deposit-btn" onclick="openDeposit()">💰 Deposit</button>
+    <button class="withdraw-btn" onclick="openWithdraw()">💸 Withdraw</button>
+  </div>
 </div>
-
-<div class="actions">
-
-<button class="btn" onclick="openM('deposit')">
-💰 Deposit
-</button>
-
-<button class="btn gold" onclick="openM('withdraw')">
-💸 Withdraw
-</button>
-
-</div>
-
-</section>
 
 <div class="notice">
 📢 Support ও Deposit/Withdraw সংক্রান্ত নির্দেশনা এখানে থাকবে।
 </div>
 
 <div class="tabs">
+  <button class="active" onclick="filterGames('All',this)">All Games</button>
+  <button onclick="filterGames('Featured',this)">Featured</button>
+  <button onclick="filterGames('Live',this)">Live</button>
+  <button onclick="filterGames('Casino',this)">Casino</button>
+  <button onclick="filterGames('Arcade',this)">Arcade</button>
+  <button onclick="filterGames('Sports',this)">Sports</button>
+  <button onclick="filterGames('Table',this)">Table</button>
+</div>
 
-<button class="tab active">All Games</button>
-<button class="tab">Featured</button>
-<button class="tab">Live</button>
-<button class="tab">Casino</button>
-<button class="tab">Arcade</button>
-<button class="tab">Sports</button>
-<button class="tab">Table</button>
+<section>
+
+<div class="section-title">
+  <h2>Featured Games</h2>
+  <span>28 Games</span>
+</div>
+
+<div class="games" id="games"></div>
+
+</section>
+</div>
+
+<!-- PROFILE -->
+
+<div id="profilePage" class="page">
+
+<div class="profile-box">
+  <h2>👤 Profile</h2>
+  <p id="userId"></p>
+  <p>Referral Link:</p>
+  <p id="refLink" style="word-break:break-all;color:#c08cff"></p>
+
+  <button class="bonus-btn"
+    onclick="copyText(document.getElementById('refLink').textContent)">
+    🔗 Referral Link Copy
+  </button>
+</div>
+
+<div class="profile-box">
+
+<h2>🎁 Daily Bonus</h2>
+
+<p>Check-in Bonus: <b>20 Coins</b> প্রতিদিন</p>
+<p>Daily Spin: <b>10 Coins</b> প্রতিদিন</p>
+<p>Treasure Box: <b>৳110</b> একবার</p>
+
+<button class="bonus-btn" onclick="claimCheckin()">
+  ✅ Check-in +20 Coins
+</button>
+
+<button class="bonus-btn" onclick="claimSpin()">
+  🎡 Spin +10 Coins
+</button>
+
+<button class="bonus-btn" onclick="claimTreasure()">
+  🎁 Treasure Box +৳110
+</button>
 
 </div>
 
-<div id="games"></div>
+<div class="profile-box">
+<h2>🤝 Referral</h2>
+<p>Successful Referral Bonus: <b>150 Coins</b></p>
+<p>Referred user must successfully deposit <b>1,000 Coins</b>.</p>
+<p>Lifetime Commission: <b>3%</b></p>
+</div>
 
-</main>
+</div>
 
-<nav>
+<!-- BOTTOM NAV -->
 
-<button class="active">
-<b>⌂</b>
-Home
+<nav class="bottom-nav">
+
+<button class="active" onclick="goHome(this)">
+<span class="bottom-icon">🏠</span>
+<span class="bottom-text">Home</span>
 </button>
 
-<button>
-<b>🎮</b>
-Games
+<button onclick="goGames(this)">
+<span class="bottom-icon">🎮</span>
+<span class="bottom-text">Games</span>
 </button>
 
-<button onclick="openM('deposit')">
-<b>💰</b>
-Wallet
+<button onclick="openWithdraw()">
+<span class="bottom-icon">💰</span>
+<span class="bottom-text">Wallet</span>
 </button>
 
-<button>
-<b>👤</b>
-Profile
+<button onclick="goProfile(this)">
+<span class="bottom-icon">👤</span>
+<span class="bottom-text">Profile</span>
 </button>
 
 </nav>
 
 </div>
 
+<!-- DEPOSIT MODAL -->
 
-<!-- DEPOSIT -->
-
-<div class="modal" id="deposit">
+<div class="modal" id="depositModal">
 
 <div class="sheet">
 
-<button class="close" onclick="closeM('deposit')">
-✕
+<div class="sheet-header">
+<h2>Deposit Coins</h2>
+<button class="close-btn" onclick="closeModal('depositModal')">×</button>
+</div>
+
+<p class="help">
+প্রথম সফল Deposit-এ 50% Bonus।<br>
+1 Coin = ৳1
+</p>
+
+<div class="payment-methods">
+
+<button class="method active" id="depositBkash"
+onclick="selectDeposit('bKash')">
+🟣 bKash
 </button>
 
-<h2>Deposit Coins</h2>
-
-<div class="status">
-First successful Deposit-এ <b>50% Bonus</b>
-<br>
-1 Coin = ৳1
-</div>
-
-<div class="paycards">
-
-<div class="pay sel" onclick="copyNum('01935654366')">
-
-🟣 <b>bKash</b>
-
-<div class="num">
-01935654366
-</div>
-
-<div class="copy">
-Tap to Copy
-</div>
+<button class="method" id="depositNagad"
+onclick="selectDeposit('Nagad')">
+🔴 Nagad
+</button>
 
 </div>
 
-
-<div class="pay" onclick="copyNum('01873570387')">
-
-🔴 <b>Nagad</b>
-
-<div class="num">
-01873570387
+<div class="payment-number">
+<b>🟣 bKash: 01935654366</b>
+<button class="copy-btn" onclick="copyText('01935654366')">
+COPY
+</button>
 </div>
 
-<div class="copy">
-Tap to Copy
+<div class="payment-number">
+<b>🔴 Nagad: 01873570387</b>
+<button class="copy-btn" onclick="copyText('01873570387')">
+COPY
+</button>
 </div>
 
-</div>
+<p class="help">
+Send Money গ্রহণযোগ্য। Cash In / Mobile Recharge গ্রহণযোগ্য নয়।
+</p>
 
-</div>
-
-<div class="amounts" id="da"></div>
+<div class="amount-grid" id="depositAmounts"></div>
 
 <input
-id="tx"
-placeholder="Transaction ID / Reference"
->
+class="input"
+id="transactionId"
+placeholder="Payment Reference / Transaction ID">
 
-<div class="note">
-শুধু Send Money গ্রহণযোগ্য।
-Cash In / Mobile Recharge গ্রহণযোগ্য নয়।
-</div>
-
-<button class="btn" onclick="demo('Deposit request তৈরি হয়েছে')">
+<button class="submit-btn" onclick="submitDeposit()">
 SUBMIT DEPOSIT REQUEST
 </button>
 
 </div>
-
 </div>
 
+<!-- WITHDRAW MODAL -->
 
-<!-- WITHDRAW -->
-
-<div class="modal" id="withdraw">
+<div class="modal" id="withdrawModal">
 
 <div class="sheet">
 
-<button class="close" onclick="closeM('withdraw')">
-✕
+<div class="sheet-header">
+<h2>Withdraw Coins</h2>
+<button class="close-btn" onclick="closeModal('withdrawModal')">×</button>
+</div>
+
+<div class="payment-methods">
+
+<button class="method active"
+id="withdrawBkash"
+onclick="selectWithdraw('bKash')">
+🟣 bKash
 </button>
 
-<h2>Withdraw Coins</h2>
-
-<div class="paycards">
-
-<div class="pay sel">
-🟣 <b>bKash</b>
-</div>
-
-<div class="pay">
-🔴 <b>Nagad</b>
-</div>
+<button class="method"
+id="withdrawNagad"
+onclick="selectWithdraw('Nagad')">
+🔴 Nagad
+</button>
 
 </div>
 
-<div class="amounts" id="wa"></div>
+<div class="amount-grid" id="withdrawAmounts"></div>
 
 <input
-id="wn"
-placeholder="আপনার bKash/Nagad নম্বর"
->
+class="input"
+id="withdrawNumber"
+inputmode="numeric"
+placeholder="আপনার bKash/Nagad নম্বর">
 
-<div class="note">
-Withdraw-এ payment number দেখানো হবে না।
-নিজের bKash/Nagad নম্বর দিন।
-</div>
+<p class="help">
+Withdraw-এ কোনো payment number দেখানো হবে না।<br>
+নিজের bKash/Nagad নম্বর দিন।<br>
+সর্বোচ্চ Withdraw: <b>30,000 Coins</b>
+</p>
 
-<button class="btn gold"
-onclick="demo('Withdrawal request তৈরি হয়েছে')">
-
+<button class="submit-btn" onclick="submitWithdraw()">
 SUBMIT WITHDRAWAL REQUEST
-
 </button>
 
 </div>
-
 </div>
-
 
 <div class="toast" id="toast"></div>
 
-
 <script>
 
-const groups={
+/* =========================
+   STATE
+========================= */
 
-"Featured Games":[
-"Live Crash",
-"Crazy Time",
-"Teen Patti Live",
-"3 Patti Live",
-"Salt Game",
-"Ganesh Game"
-],
+let state = JSON.parse(
+  localStorage.getItem("666BDT_STATE") || "{}"
+);
 
-"Casino Games":[
-"Slots",
-"Dice",
-"Spin Wheel",
-"Card Game"
-],
+state.balance = Number(state.balance || 0);
+state.deposited = !!state.deposited;
+state.firstDepositBonus = !!state.firstDepositBonus;
+state.treasureClaimed = !!state.treasureClaimed;
+state.lastCheckin = state.lastCheckin || "";
+state.lastSpin = state.lastSpin || "";
 
-"Arcade Games":[
-"Target",
-"Puzzle",
-"Brick Breaker",
-"Flying Game",
-"Runner",
-"Mines",
-"Coin Catch",
-"Tower Game"
-],
+function saveState(){
+  localStorage.setItem(
+    "666BDT_STATE",
+    JSON.stringify(state)
+  );
 
-"Sports & Racing":[
-"Racing",
-"Football",
-"Basketball",
-"Quick Match",
-"Ludo"
-],
+  updateBalance();
+}
 
-"Table Games":[
-"Teen Patti",
-"3 Patti",
-"Rummy",
-"Andar Bahar",
-"Baccarat"
-]
+function updateBalance(){
+  document.getElementById("balance").textContent =
+    "৳" + state.balance.toLocaleString("en-US");
+}
 
-};
+/* =========================
+   USER ID
+========================= */
 
+let userId =
+  localStorage.getItem("666BDT_USER_ID");
 
-const ico=[
-"🎰","🎡","🃏","♠️","💎","🪙",
-"🎯","🧩","🧱","✈️","🏃","💣",
-"🪙","🏰","🏎️","⚽","🏀","⚡",
-"🎲","♣️","♥️","♦️","🎴","🃏",
-"♣️","🎴","🃏","🎴"
+if(!userId){
+
+  userId =
+    "U" +
+    Math.random()
+      .toString(36)
+      .substring(2,10)
+      .toUpperCase();
+
+  localStorage.setItem(
+    "666BDT_USER_ID",
+    userId
+  );
+}
+
+document.getElementById("userId").textContent =
+  "User ID: " + userId;
+
+document.getElementById("refLink").textContent =
+  "https://t.me/BDT666Bot?start=ref_" + userId;
+
+/* =========================
+   GAMES
+========================= */
+
+const games = [
+
+["Live Crash","Featured","crash"],
+["Crazy Time","Featured","wheel"],
+["Teen Patti Live","Featured","cards"],
+["3 Patti Live","Featured","patti"],
+["Salt Game","Featured","diamond"],
+["Ganesh Game","Featured","ganesh"],
+
+["Slots","Casino","slots"],
+["Dice","Casino","dice"],
+["Spin Wheel","Casino","wheel"],
+["Card Game","Casino","cards"],
+
+["Target","Arcade","target"],
+["Puzzle","Arcade","puzzle"],
+["Brick Breaker","Arcade","brick"],
+["Flying Game","Arcade","flying"],
+["Runner","Arcade","runner"],
+["Mines","Arcade","mine"],
+["Coin Catch","Arcade","coin"],
+["Tower Game","Arcade","tower"],
+
+["Racing","Sports","racing"],
+["Football","Sports","football"],
+["Basketball","Sports","basketball"],
+["Quick Match","Sports","match"],
+["Ludo","Sports","ludo"],
+
+["Teen Patti","Table","cards"],
+["3 Patti","Table","patti"],
+["Rummy","Table","rummy"],
+["Andar Bahar","Table","cards"],
+["Baccarat","Table","baccarat"]
+
 ];
 
+/* =========================
+   GAME SVG PICTURES
+========================= */
 
-let k=0;
+function gamePicture(type){
 
+let s =
+'stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"';
 
-document.getElementById('games').innerHTML=
+let x="";
 
-Object.entries(groups).map(([c,a])=>`
+if(type==="crash"){
 
-<section>
+x=`
+<path d="M15 78L35 57L48 66L82 22"
+fill="none" ${s}/>
+<circle cx="82" cy="22" r="7" fill="#ffd23d"/>
+<path d="M75 22h16" ${s}/>
+`;
 
-<h3>${c}</h3>
+}
 
-<div class="grid">
+else if(type==="wheel"){
 
-${a.map(n=>`
+x=`
+<circle cx="50" cy="50" r="35"
+fill="#8b4de8" ${s}/>
+<path d="M50 15V85M15 50H85M25 25L75 75M75 25L25 75"
+${s}/>
+<circle cx="50" cy="50" r="7" fill="#ffd23d"/>
+`;
 
-<div class="game">
+}
 
-<div class="pic">
-${ico[k++%ico.length]}
+else if(
+type==="cards" ||
+type==="patti" ||
+type==="rummy" ||
+type==="baccarat"
+){
+
+x=`
+<rect x="25" y="18" width="43" height="61"
+rx="6" fill="white" ${s}/>
+<text x="37" y="57"
+font-size="27"
+font-weight="bold"
+fill="#e33">A</text>
+<path d="M70 28L82 40L70 52L58 40Z"
+fill="#e44"/>
+`;
+
+}
+
+else if(type==="diamond"){
+
+x=`
+<path d="M15 35L30 17H70L85 35L50 83Z"
+fill="#27d8ff" ${s}/>
+<path d="M15 35H85M30 17L50 83L70 17"
+${s}/>
+`;
+
+}
+
+else if(type==="ganesh"){
+
+x=`
+<circle cx="50" cy="47" r="29"
+fill="#f4b82f" ${s}/>
+<path d="M39 44Q50 28 61 44V68"
+${s}/>
+<path d="M30 50H70"
+${s}/>
+`;
+
+}
+
+else if(type==="slots"){
+
+x=`
+<rect x="16" y="25" width="68" height="49"
+rx="8" fill="#e33" ${s}/>
+<rect x="25" y="35" width="46" height="28"
+fill="white"/>
+<text x="29" y="57"
+font-size="19"
+font-weight="bold"
+fill="#e33">777</text>
+`;
+
+}
+
+else if(type==="dice"){
+
+x=`
+<rect x="24" y="24" width="52" height="52"
+rx="9" fill="white" ${s}/>
+<circle cx="39" cy="39" r="4"/>
+<circle cx="61" cy="61" r="4"/>
+<circle cx="61" cy="39" r="4"/>
+`;
+
+}
+
+else if(type==="target"){
+
+x=`
+<circle cx="50" cy="50" r="35"
+fill="#e33" ${s}/>
+<circle cx="50" cy="50" r="23"
+fill="white"/>
+<circle cx="50" cy="50" r="11"
+fill="#e33"/>
+`;
+
+}
+
+else if(type==="puzzle"){
+
+x=`
+<path d="M20 28H43V21
+C43 13 57 13 57 21V28H80V51
+H72C64 51 64 65 72 65H80V80H20V65H28
+C36 65 36 51 28 51H20Z"
+fill="#8d50ec" ${s}/>
+`;
+
+}
+
+else if(type==="brick"){
+
+x=`
+<rect x="18" y="22" width="20" height="11" fill="#ef4444"/>
+<rect x="40" y="22" width="20" height="11" fill="#f7c53d"/>
+<rect x="62" y="22" width="20" height="11" fill="#3dd5ff"/>
+<path d="M18 70H82" ${s}/>
+<path d="M50 54L41 70H59Z" fill="white"/>
+`;
+
+}
+
+else if(type==="flying"){
+
+x=`
+<path d="M20 52Q38 31 57 49Q70 62 82 45"
+fill="none" ${s}/>
+<circle cx="62" cy="37" r="8" fill="#ffd23d"/>
+<path d="M28 59L18 66" ${s}/>
+`;
+
+}
+
+else if(type==="runner"){
+
+x=`
+<circle cx="55" cy="27" r="9"
+fill="#ffd23d"/>
+<path d="M55 37L43 55L61 55L72 40"
+fill="none" ${s}/>
+<path d="M43 55L32 73M61 55L74 73"
+${s}/>
+`;
+
+}
+
+else if(type==="mine"){
+
+x=`
+<circle cx="50" cy="53" r="23"
+fill="#555" ${s}/>
+<path d="M50 17V32M25 28L36 39M75 28L64 39M17 53H32M83 53H68"
+${s}/>
+`;
+
+}
+
+else if(type==="coin"){
+
+x=`
+<circle cx="50" cy="50" r="30"
+fill="#f4bd32" ${s}/>
+<text x="40" y="61"
+font-size="28"
+font-weight="bold"
+fill="#7b4b00">৳</text>
+`;
+
+}
+
+else if(type==="tower"){
+
+x=`
+<path d="M28 78V58H72V78M35 58V43H65V58M41 43V27H59V43"
+fill="#8e51ec" ${s}/>
+`;
+
+}
+
+else if(type==="racing"){
+
+x=`
+<path d="M17 75Q50 15 83 75"
+fill="none" ${s}/>
+<circle cx="50" cy="45" r="12"
+fill="#ffd23d"/>
+`;
+
+}
+
+else if(type==="football"){
+
+x=`
+<circle cx="50" cy="50" r="30"
+fill="white" ${s}/>
+<path d="M50 34L63 43L58 58H42L37 43Z"
+fill="#222"/>
+`;
+
+}
+
+else if(type==="basketball"){
+
+x=`
+<circle cx="50" cy="50" r="30"
+fill="#f28b28" ${s}/>
+<path d="M20 50H80M50 20Q35 50 50 80"
+fill="none" ${s}/>
+`;
+
+}
+
+else if(type==="match"){
+
+x=`
+<rect x="24" y="24" width="52" height="52"
+rx="9" fill="#24c76b" ${s}/>
+<path d="M37 50H63M50 37V63"
+${s}/>
+`;
+
+}
+
+else if(type==="ludo"){
+
+x=`
+<rect x="20" y="20" width="60" height="60"
+rx="8" fill="white" ${s}/>
+<circle cx="35" cy="35" r="8" fill="#e44"/>
+<circle cx="65" cy="35" r="8" fill="#4dd8ff"/>
+<circle cx="35" cy="65" r="8" fill="#ffd23d"/>
+<circle cx="65" cy="65" r="8" fill="#35c86b"/>
+`;
+
+}
+
+else{
+
+x=`
+<circle cx="50" cy="50" r="30"
+fill="#8c50eb" ${s}/>
+`;
+
+}
+
+return `
+<svg viewBox="0 0 100 100">
+${x}
+</svg>
+`;
+
+}
+
+/* =========================
+   RENDER GAMES
+========================= */
+
+function renderGames(list=games){
+
+document.getElementById("games").innerHTML =
+list.map(g=>`
+
+<article class="game-card">
+
+<div class="game-image">
+${gamePicture(g[2])}
 </div>
 
-<div class="ginfo">
+<div class="game-body">
 
-<div class="gname">
-${n}
+<div class="game-name">
+${g[0]}
 </div>
 
-<button
-class="play"
-onclick="demo('${n} Demo mode')">
-
+<button class="play-btn"
+onclick="playGame('${g[0]}')">
 PLAY NOW
-
 </button>
 
 </div>
 
-</div>
+</article>
 
-`).join('')}
-
-</div>
-
-</section>
-
-`).join('');
-
-
-const am=[
-100,200,500,1000,2000,
-5000,10000,20000,30000
-];
-
-
-for(const id of ['da','wa']){
-
-document.getElementById(id).innerHTML=
-
-am.slice(
-0,
-id==='wa'?6:9
-)
-.map((x,i)=>`
-
-<button class="amount ${!i?'sel':''}">
-${x.toLocaleString()} Coins
-</button>
-
-`)
-.join('');
+`).join("");
 
 }
 
-
-function openM(x){
+function filterGames(category,button){
 
 document
-.getElementById(x)
-.classList
-.add('show');
+.querySelectorAll(".tabs button")
+.forEach(b=>b.classList.remove("active"));
 
-}
+button.classList.add("active");
 
+if(category==="All"){
 
-function closeM(x){
+renderGames(games);
 
-document
-.getElementById(x)
-.classList
-.remove('show');
+}else{
 
-}
-
-
-function copyNum(n){
-
-navigator.clipboard?.writeText(n);
-
-demo('নম্বর Copy হয়েছে');
-
-}
-
-
-function demo(t){
-
-let x=document.getElementById('toast');
-
-x.textContent=t;
-
-x.style.display='block';
-
-setTimeout(
-()=>x.style.display='none',
-1800
+renderGames(
+games.filter(g=>g[1]===category)
 );
 
 }
+
+}
+
+function playGame(name){
+
+showToast(
+name+" নির্বাচিত হয়েছে"
+);
+
+}
+
+/* =========================
+   DEPOSIT
+========================= */
+
+let depositMethod="bKash";
+let depositAmount=100;
+
+const depositList=[
+100,200,500,1000,2000,5000,
+10000,15000,20000,25000,30000
+];
+
+function renderDepositAmounts(){
+
+document.getElementById(
+"depositAmounts"
+).innerHTML = depositList.map(
+amount=>`
+
+<button
+class="amount ${depositAmount===amount?"active":""}"
+onclick="depositAmount=${amount};renderDepositAmounts()">
+
+${amount.toLocaleString()} Coins
+
+</button>
+
+`).join("");
+
+}
+
+function selectDeposit(method){
+
+depositMethod=method;
+
+document
+.getElementById("depositBkash")
+.classList.toggle(
+"active",
+method==="bKash"
+);
+
+document
+.getElementById("depositNagad")
+.classList.toggle(
+"active",
+method==="Nagad"
+);
+
+}
+
+function openDeposit(){
+
+renderDepositAmounts();
+
+document
+.getElementById("depositModal")
+.classList.add("show");
+
+}
+
+function submitDeposit(){
+
+let tx =
+document
+.getElementById("transactionId")
+.value
+.trim();
+
+if(!tx){
+
+showToast(
+"Transaction ID দিন"
+);
+
+return;
+
+}
+
+/*
+ Demo behaviour:
+ actual successful payment must be
+ verified by backend/admin later.
+*/
+
+state.deposited=true;
+
+if(!state.firstDepositBonus){
+
+state.firstDepositBonus=true;
+
+let bonus =
+Math.floor(depositAmount*0.50);
+
+state.balance +=
+depositAmount + bonus;
+
+showToast(
+"Deposit + 50% First Deposit Bonus"
+);
+
+}else{
+
+state.balance +=
+depositAmount;
+
+showToast(
+"Deposit request submitted"
+);
+
+}
+
+saveState();
+
+closeModal("depositModal");
+
+}
+
+/* =========================
+   WITHDRAW
+========================= */
+
+let withdrawMethod="bKash";
+let withdrawAmount=100;
+
+const withdrawList=[
+100,200,500,1000,2000,5000,
+10000,15000,20000,25000,30000
+];
+
+function renderWithdrawAmounts(){
+
+document.getElementById(
+"withdrawAmounts"
+).innerHTML =
+withdrawList.map(
+amount=>`
+
+<button
+class="amount ${withdrawAmount===amount?"active":""}"
+onclick="withdrawAmount=${amount};renderWithdrawAmounts()">
+
+${amount.toLocaleString()} Coins
+
+</button>
+
+`).join("");
+
+}
+
+function selectWithdraw(method){
+
+withdrawMethod=method;
+
+document
+.getElementById("withdrawBkash")
+.classList.toggle(
+"active",
+method==="bKash"
+);
+
+document
+.getElementById("withdrawNagad")
+.classList.toggle(
+"active",
+method==="Nagad"
+);
+
+}
+
+function openWithdraw(){
+
+renderWithdrawAmounts();
+
+document
+.getElementById("withdrawModal")
+.classList.add("show");
+
+}
+
+function submitWithdraw(){
+
+let number =
+document
+.getElementById("withdrawNumber")
+.value
+.trim();
+
+if(!/^01[0-9]{9}$/.test(number)){
+
+showToast(
+"সঠিক ১১ সংখ্যার নম্বর দিন"
+);
+
+return;
+
+}
+
+if(withdrawAmount>30000){
+
+showToast(
+"সর্বোচ্চ 30,000 Coins"
+);
+
+return;
+
+}
+
+if(withdrawAmount>state.balance){
+
+showToast(
+"পর্যাপ্ত balance নেই"
+);
+
+return;
+
+}
+
+/*
+ Demo request:
+ real payout is handled by backend/admin.
+*/
+
+state.balance -=
+withdrawAmount;
+
+saveState();
+
+showToast(
+"Withdrawal request submitted"
+);
+
+closeModal("withdrawModal");
+
+}
+
+/* =========================
+   DAILY BONUS
+========================= */
+
+function dateKey(){
+
+return new Date()
+.toISOString()
+.slice(0,10);
+
+}
+
+function claimCheckin(){
+
+if(!state.deposited){
+
+showToast(
+"প্রথমে সফল Deposit করতে হবে"
+);
+
+return;
+
+}
+
+if(state.lastCheckin===dateKey()){
+
+showToast(
+"আজকের Check-in নেওয়া হয়েছে"
+);
+
+return;
+
+}
+
+state.lastCheckin=dateKey();
+
+state.balance +=20;
+
+saveState();
+
+showToast(
+"+20 Coins Check-in"
+);
+
+}
+
+function claimSpin(){
+
+if(!state.deposited){
+
+showToast(
+"প্রথমে সফল Deposit করতে হবে"
+);
+
+return;
+
+}
+
+if(state.lastSpin===dateKey()){
+
+showToast(
+"আজকের Spin নেওয়া হয়েছে"
+);
+
+return;
+
+}
+
+state.lastSpin=dateKey();
+
+state.balance +=10;
+
+saveState();
+
+showToast(
+"+10 Coins Spin"
+);
+
+}
+
+function claimTreasure(){
+
+if(!state.deposited){
+
+showToast(
+"প্রথমে সফল Deposit করতে হবে"
+);
+
+return;
+
+}
+
+if(state.treasureClaimed){
+
+showToast(
+"Treasure Box একবারই পাওয়া যাবে"
+);
+
+return;
+
+}
+
+state.treasureClaimed=true;
+
+state.balance +=110;
+
+saveState();
+
+showToast(
+"Treasure Box +৳110"
+);
+
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function goHome(button){
+
+document
+.getElementById("homePage")
+.classList.add("active");
+
+document
+.getElementById("profilePage")
+.classList.remove("active");
+
+setActiveNav(button);
+
+}
+
+function goGames(button){
+
+goHome(button);
+
+window.scrollTo({
+top:300,
+behavior:"smooth"
+});
+
+}
+
+function goProfile(button){
+
+document
+.getElementById("homePage")
+.classList.remove("active");
+
+document
+.getElementById("profilePage")
+.classList.add("active");
+
+setActiveNav(button);
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+function setActiveNav(button){
+
+document
+.querySelectorAll(".bottom-nav button")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+}
+
+/* =========================
+   UTILITIES
+========================= */
+
+function copyText(text){
+
+navigator.clipboard
+?.writeText(text);
+
+showToast(
+"কপি হয়েছে"
+);
+
+}
+
+function closeModal(id){
+
+document
+.getElementById(id)
+.classList.remove("show");
+
+}
+
+function showToast(text){
+
+let toast =
+document.getElementById("toast");
+
+toast.textContent=text;
+
+toast.style.display="block";
+
+clearTimeout(window.toastTimer);
+
+window.toastTimer =
+setTimeout(
+()=>{
+toast.style.display="none";
+},
+2200
+);
+
+}
+
+/* MODAL BACKDROP CLOSE */
+
+document
+.getElementById("depositModal")
+.addEventListener(
+"click",
+function(e){
+
+if(e.target===this){
+closeModal("depositModal");
+}
+
+});
+
+document
+.getElementById("withdrawModal")
+.addEventListener(
+"click",
+function(e){
+
+if(e.target===this){
+closeModal("withdrawModal");
+}
+
+});
+
+/* START */
+
+renderGames();
+renderDepositAmounts();
+renderWithdrawAmounts();
+updateBalance();
 
 </script>
 
